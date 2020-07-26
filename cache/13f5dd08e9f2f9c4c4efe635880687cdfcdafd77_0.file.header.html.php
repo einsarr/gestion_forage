@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-07-26 19:22:48
+/* Smarty version 3.1.30, created on 2020-07-26 22:43:52
   from "C:\xampp\htdocs\gestion_forage\src\view\header.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f1dbbe8dd2634_71105601',
+  'unifunc' => 'content_5f1deb081c8f04_39067368',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '13f5dd08e9f2f9c4c4efe635880687cdfcdafd77' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\header.html',
-      1 => 1589644743,
+      1 => 1595796217,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f1dbbe8dd2634_71105601 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f1deb081c8f04_39067368 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,7 +33,7 @@ function content_5f1dbbe8dd2634_71105601 (Smarty_Internal_Template $_smarty_tpl)
     <meta name="description" content="First App Samane | Application des gestion des utilisateurs">
     <meta name="author" content="ngorseck@gmail.com">
 
-    <title>Gest-User</title>
+    <title>Forage</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
@@ -43,6 +43,8 @@ public/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="
     <!-- Custom styles for this template-->
     <link href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 public/template/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+public/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -55,11 +57,11 @@ public/template/css/sb-admin-2.min.css" rel="stylesheet">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Gest-User</div>
+            <div class="sidebar-brand-text mx-3">Forage</div>
         </a>
 
         <!-- Divider -->
@@ -67,7 +69,7 @@ public/template/css/sb-admin-2.min.css" rel="stylesheet">
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Tableau de bord</span></a>
         </li>
@@ -79,31 +81,55 @@ public/template/css/sb-admin-2.min.css" rel="stylesheet">
         <div class="sidebar-heading">
             Gestion des pages
         </div>
-
+        <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_USER")) {?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Gestion</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Gestion:</h6>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/liste">Clients</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Village/liste">Villages</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Chef_village/liste">Chefs de village</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/liste">Compteurs</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/liste">Consommations</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/liste">Abonnement</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Facturation/liste">Faturation</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/liste">Reglements</a>
+                </div>
+            </div>
+        </li>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_ADMIN")) {?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+                <span>Sécurité</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Administartion:</h6>
-
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_USER")) {?>
                         <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 User/liste">Utilisateurs</a>
-                    <?php }?>
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_ADMIN")) {?>
                         <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Roles/liste">Roles</a>
                         <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 UserRoles/liste">Affectation de roles</a>
-                    <?php }?>
-
                 </div>
             </div>
         </li>
+        <?php }?>
 
 
         <!-- Divider -->

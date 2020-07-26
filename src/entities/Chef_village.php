@@ -13,9 +13,10 @@ class Chef_village
     private $prenom_chef_village;
     /** @Column(type="string") **/
     private $telephone_village;
-    /**
-     * One Chef_village has One Village.
-     * @OneToOne(targetEntity="Village", mappedBy="chef_village")
+   /**
+     * One Chef has One Village.
+     * @OneToOne(targetEntity="Village", inversedBy="chef_village")
+     * @JoinColumn(name="village_id", referencedColumnName="id")
      */
     private $village;
     /**
@@ -23,6 +24,12 @@ class Chef_village
      * @OneToMany(targetEntity="Village", mappedBy="chef_village")
      */
     private $clients;
+     /**
+     * One Chef_village has One Client.
+     * @OneToOne(targetEntity="Client", inversedBy="chef_village")
+     * @JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
 
     public function __construct()
     {

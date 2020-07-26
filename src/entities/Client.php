@@ -20,12 +20,6 @@ class Client
      */
     private $village;
     /**
-     * Many Clients have one Chef_village. This is the owning side.
-     * @ManyToOne(targetEntity="Chef_village", inversedBy="clients")
-     * @JoinColumn(name="chef_village_id", referencedColumnName="id")
-     */
-    private $chef_village;
-    /**
      * One Client has many Abonnement. This is the inverse side.
      * @OneToMany(targetEntity="Abonnement", mappedBy="client")
      */

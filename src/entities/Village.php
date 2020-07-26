@@ -15,7 +15,8 @@ class Village
     private $nom_village;
     /**
      * One Village has One Chef_village.
-     * @OneToOne(targetEntity="Chef_village", mappedBy="village")
+     * @OneToOne(targetEntity="Chef_village", inversedBy="village")
+     * @JoinColumn(name="chef_village_id", referencedColumnName="id")
      */
     private $chef_village;
     
@@ -41,11 +42,11 @@ class Village
         $this->identifiant_village = $identifiant_village;
     }
 
-    public function getPrenom()
+    public function getNom_village()
     {
         return $this->nom_village;
     }
-    public function setPrenom($nom_village)
+    public function setNom_village($nom_village)
     {
         $this->nom_village = $nom_village;
     }

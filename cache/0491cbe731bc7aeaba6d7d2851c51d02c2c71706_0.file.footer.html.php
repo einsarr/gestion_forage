@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-07-26 19:22:48
+/* Smarty version 3.1.30, created on 2020-07-27 01:03:52
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f1dbbe8ec1229_89844005',
+  'unifunc' => 'content_5f1e0bd8da6374_98614618',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1589644743,
+      1 => 1595804540,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f1dbbe8ec1229_89844005 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f1e0bd8da6374_98614618 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -107,8 +107,114 @@ public/template/js/demo/chart-area-demo.js"><?php echo '</script'; ?>
 public/template/js/demo/chart-pie-demo.js"><?php echo '</script'; ?>
 >
 
-</body>
+<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+public/template/vendor/datatables/jquery.dataTables.min.js"><?php echo '</script'; ?>
+>
+  <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+public/template/vendor/datatables/dataTables.bootstrap4.min.js"><?php echo '</script'; ?>
+>
 
+  <!-- Page level custom scripts -->
+  <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
+>
+
+
+  <?php echo '<script'; ?>
+>
+    $(document).ready(function() {
+
+        //CRUD CLIENT
+        load_clients();
+        $('#client_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalClient').modal('hide');
+                        $('#client_form')[0].reset();
+                        load_clients();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalClient').modal('hide');
+                        load_clients();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-client', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalClient').modal('show');
+                    $('#village_id').val(data.village);
+                    $('#nom_famille').val(data.nom_famille);
+                    $('#telephone_abonne').val(data.telephone_abonne);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un client");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-client', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_clients();
+                    }
+                });
+            }
+        });
+    });
+
+
+    //Fonction de chargement des clients
+    function load_clients() {
+        $.ajax({
+            url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/load_clients",
+            dataType: "json",
+            success: function(result) {
+                $('#result-clients').html(result);
+            }
+        });
+    }
+  <?php echo '</script'; ?>
+>
+</body>
 </html>
 
 <?php }
