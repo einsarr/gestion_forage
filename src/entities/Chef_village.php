@@ -12,7 +12,7 @@ class Chef_village
     /** @Column(type="string") **/
     private $prenom_chef_village;
     /** @Column(type="string") **/
-    private $telephone_village;
+    private $telephone_chef_village;
    /**
      * One Chef has One Village.
      * @OneToOne(targetEntity="Village", inversedBy="chef_village")
@@ -44,13 +44,21 @@ class Chef_village
         $this->id = $id;
     }
 
-    public function getRoles()
+    public function getPrenom_chef_village()
     {
-        return $this->roles;
+        return $this->prenom_chef_village;
     }
-    public function setRoles($roles)
+    public function setPrenom_chef_village($prenom_chef_village)
     {
-        $this->roles = $roles;
+        $this->prenom_chef_village = $prenom_chef_village;
+    }
+    public function getTelephone_chef_village()
+    {
+        return $this->telephone_chef_village;
+    }
+    public function setTelephone_chef_village($telephone_chef_village)
+    {
+        $this->telephone_chef_village = $telephone_chef_village;
     }
 
     public function hasRole($nom)

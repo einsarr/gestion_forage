@@ -22,7 +22,6 @@ class Village
     
     public function __construct()
     {
-        $this->roles = new ArrayCollection();
     }
     public function getId()
     {
@@ -33,11 +32,11 @@ class Village
         $this->id = $id;
     }
 
-    public function getNom()
+    public function getIdentifiant_village()
     {
         return $this->identifiant_village;
     }
-    public function setNom($identifiant_village)
+    public function setIdentifiant_village($identifiant_village)
     {
         $this->identifiant_village = $identifiant_village;
     }
@@ -69,13 +68,13 @@ class Village
         $this->password = $password;
     }
 
-    public function getRoles()
+    public function getChef_village()
     {
-        return $this->roles;
+        return $this->chef_village;
     }
-    public function setRoles($roles)
+    public function setChef_village($chef_village)
     {
-        $this->roles = $roles;
+        $this->chef_village = $chef_village;
     }
 
     public function hasRole($identifiant_village)

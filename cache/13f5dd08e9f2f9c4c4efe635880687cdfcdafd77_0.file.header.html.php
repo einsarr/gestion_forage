@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-07-26 22:43:52
+/* Smarty version 3.1.30, created on 2020-07-27 01:26:46
   from "C:\xampp\htdocs\gestion_forage\src\view\header.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f1deb081c8f04_39067368',
+  'unifunc' => 'content_5f1e1136ac1209_14112651',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '13f5dd08e9f2f9c4c4efe635880687cdfcdafd77' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\header.html',
-      1 => 1595796217,
+      1 => 1595805936,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f1deb081c8f04_39067368 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f1e1136ac1209_14112651 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,12 +30,13 @@ function content_5f1deb081c8f04_39067368 (Smarty_Internal_Template $_smarty_tpl)
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="First App Samane | Application des gestion des utilisateurs">
+    <meta name="description" content="First App Samane | Application de gestion des forages">
     <meta name="author" content="ngorseck@gmail.com">
 
     <title>Forage</title>
-
+    
     <!-- Custom fonts for this template-->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@8.19.0/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 public/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">

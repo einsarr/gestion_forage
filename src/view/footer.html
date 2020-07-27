@@ -63,16 +63,17 @@
 
 <script src="{$url_base}public/template/vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="{$url_base}public/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+ 
   <!-- Page level custom scripts -->
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
   <script src="{$url_base}public/template/js/demo/datatables-demo.js"></script>
 
 
   <script>
     $(document).ready(function() {
-
-        //CRUD CLIENT
+        load_villages();
         load_clients();
+        //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
             if ($('#action').val() == 'Add') {
@@ -141,6 +142,84 @@
     });
 
 
+    //CRUD VILLAGE
+        $('#village_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}Village/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalVillage').modal('hide');
+                        $('#village_form')[0].reset();
+                        load_villages();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "{$url_base}Village/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalVillage').modal('hide');
+                        load_villages();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-village', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{$url_base}Village/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalVillaget').modal('show');
+                    $('#village_id').val(data.village);
+                    $('#nom_famille').val(data.nom_famille);
+                    $('#telephone_abonne').val(data.telephone_abonne);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un village");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-village', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}Village/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_villages();
+                    }
+                });
+            }
+        });
+
+
+    //Fonction de chargement des villages
+    function load_villages() {
+            $.ajax({
+                url: "{$url_base}Village/load_villages",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-villages').html(result);
+                }
+        });
+    }
     //Fonction de chargement des clients
     function load_clients() {
         $.ajax({

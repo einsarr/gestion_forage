@@ -11,7 +11,7 @@ namespace src\model;
 
 use libs\system\Model; 
 	
-class VillageRepository extends Model{
+class Chef_villageRepository extends Model{
 	
 	/**
 	 * Methods with DQL (Doctrine Query Language) 
@@ -20,14 +20,7 @@ class VillageRepository extends Model{
 		parent::__construct();
 	}
 
-	public function getVillage($id)
-	{
-		if($this->db != null)
-		{
-			return $this->db->getRepository('Village')->find(array('id' => $id));
-		}
-	}
-	public function getChef_Village($id)
+	public function getChef_village($id)
 	{
 		if($this->db != null)
 		{
@@ -35,7 +28,7 @@ class VillageRepository extends Model{
 		}
 	}
 	
-	public function addVillage($village)
+	public function addChef_village($village)
 	{
 		if($this->db != null)
 		{
@@ -46,10 +39,10 @@ class VillageRepository extends Model{
 		}
 	}
 	
-	public function deleteVillage($id){
+	public function deleteChef_village($id){
 		if($this->db != null)
 		{
-			$village = $this->db->find('Village', $id);
+			$village = $this->db->find('Chef_village', $id);
 			if($village != null)
 			{
 				$this->db->remove($village);
@@ -60,10 +53,10 @@ class VillageRepository extends Model{
 		}
 	}
 	
-	public function updateVillage($village){
+	public function updateChef_village($village){
 		if($this->db != null)
 		{
-			$u = $this->db->find('Village', $village->getId());
+			$u = $this->db->find('Chef_village', $village->getId());
 			if($u != null)
 			{
 				$u->setNom($village->getNom());
@@ -81,20 +74,20 @@ class VillageRepository extends Model{
 		}
 	}
 	
-	public function listeVillages(){
+	public function liste_chefs_village(){
 		if($this->db != null)
 		{
-			return $this->db->createQuery("SELECT u FROM Village u")->getResult();// array of Village objects
+			return $this->db->createQuery("SELECT u FROM Chef_village u")->getResult();// array of Chef_village objects
 		}
 	}
 	
 
 	
-	public function getVillageByLogin($email, $password)
+	public function getChef_villageByLogin($email, $password)
 	{
         $query = $this
                     ->db
-                    ->createQuery('SELECT u FROM Village u 
+                    ->createQuery('SELECT u FROM Chef_village u 
                                     WHERE u.email = :em 
                                     AND u.password = :pwd');
         $query->setParameter('em', $email);
@@ -102,7 +95,7 @@ class VillageRepository extends Model{
         $village = $query->getSingleResult();
 	    return $village;
 
-        //return $this->db->getRepository('Village')->find(array('email' => $email, 'password' => $password));
+        //return $this->db->getRepository('Chef_village')->find(array('email' => $email, 'password' => $password));
 	}
 
     public function getRoleByName($nom){
