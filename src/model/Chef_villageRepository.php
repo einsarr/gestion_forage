@@ -20,7 +20,14 @@ class Chef_villageRepository extends Model{
 		parent::__construct();
 	}
 
-	public function getChef_village($id)
+	public function getVillage($id)
+	{
+		if($this->db != null)
+		{
+			return $this->db->getRepository('Village')->find(array('id' => $id));
+		}
+	}
+	public function get_chef_village($id)
 	{
 		if($this->db != null)
 		{
@@ -28,14 +35,14 @@ class Chef_villageRepository extends Model{
 		}
 	}
 	
-	public function addChef_village($village)
+	public function addChef_village($chef_village)
 	{
 		if($this->db != null)
 		{
-			$this->db->persist($village);
+			$this->db->persist($chef_village);
 			$this->db->flush();
 
-			return $village->getId();
+			return $chef_village->getId();
 		}
 	}
 	
@@ -67,17 +74,16 @@ class Chef_villageRepository extends Model{
                 $u->setPassword($village->getPassword());
                 $u->setRoles($village->getRoles());
 				$this->db->flush();
-
 			}else {
 				die("Objet ".$village->getId()." n'existe pas!!");
 			}	
 		}
 	}
 	
-	public function liste_chefs_village(){
+	public function liste_chef_Villages(){
 		if($this->db != null)
 		{
-			return $this->db->createQuery("SELECT u FROM Chef_village u")->getResult();// array of Chef_village objects
+			return $this->db->createQuery("SELECT c FROM Chef_village c")->getResult();// array of Chef_village objects
 		}
 	}
 	

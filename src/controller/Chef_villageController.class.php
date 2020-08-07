@@ -22,47 +22,51 @@ class Chef_villageController extends Controller
         $userdb = new UserRepository();
         $this->data['users'] = $userdb->listeUser();
 
-        $chef_villagedb = new Chef_villageRepository();
-        $this->data['chefs_village'] = $chef_villagedb->liste_chef_Villages();
-        return $this->view->load("villages/liste", $this->data);
+        $villagedb = new VillageRepository();
+        $this->data['villages'] = $villagedb->listeVillages();
+
+        //$chef_villagedb = new Chef_villageRepository();
+        //$this->data['chefs_village'] = $chef_villagedb->liste_chef_Villages();
+        return $this->view->load("chefs_village/liste", $this->data);
     }
-    public function load_villages()
+    public function load_chefs_villages()
     {
-        $village = new VillageRepository();
-        $villages = $village->listeVillages();
+        $chef_village = new Chef_villageRepository();
+        $chefs_village = $chef_village->liste_chef_Villages();
         $num=0;
         $output="";
-        foreach($villages as $key=>$value)
+        
+        foreach($chefs_village as $key=>$value)
         {
             $output.= "<tr>
                     <td>".++$num."</td>
-                    <td>".$value->getNom_village()."</td>
-                    <td>".$value->getIdentifiant_village()."</td>
-                    <td></td>
+                    <td>".$value->getPrenom_chef_village()."</td>
+                    <td>".$value->getTelephone_chef_village()."</td>
+                    <td>".$value->getVillage()->getNom_village()."</td>
                     <td>
-                        <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-village'><span class='fa fa-edit'></span></button>
-                        <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-village'><span class='fa fa-trash'></span></button>
+                        <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-chef_village'><span class='fa fa-edit'></span></button>
+                        <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-chef_village'><span class='fa fa-trash'></span></button>
                     </td>
                 </tr>";
         }
         echo json_encode($output);
     }
     public function add(){
-        $village = new VillageRepository();
+        $chef_village = new Chef_villageRepository();
         extract($_POST);
-        $villageObject = new Village();
-        $chef_village = $village->getVillage($chef_village_id);
-        $villageObject->setPrenom_chef_village(addslashes($prenom_chef_village));
-        $villageObject->setIdentifiant_village(addslashes($identifiant_village));
-        $villageObject->setNom_village(addslashes($nom_village));
-        $villageObject->setChef_village($chef_village);
+        //var_dump($village_id);exit;
+        $village = $chef_village->getVillage($village_id);
+        $chef_villageObject = new Chef_village();
+        $chef_villageObject->setPrenom_chef_village(addslashes($prenom_chef_village));
+        $chef_villageObject->setTelephone_chef_village(addslashes($telephone_chef_village));
+        $chef_villageObject->setVillage($village);
 
-        $client->addVillage($villageObject);
+        $chef_village->addChef_village($chef_villageObject);
         echo json_encode("ajout réussie avec succès");
    }
    public function edit($id){
-        $village = new VillageRepository();
-        $data = $village->getClient($id);
+        $chef_village = new Chef_villageRepository();
+        $data = $chef_village->getChef_village($id);
         $output = array(
             'id' => $data->getId(),
             'village' => $data->getVillage()->getId(),
@@ -72,22 +76,22 @@ class Chef_villageController extends Controller
         echo json_encode($output);
     }
     public function update(){
-        $client = new ClientRepository();
+        $chef_village = new Chef_villageRepository();
         extract($_POST);
-        $clientObject = $client->getClient($id);
-        $clientObject = new Client();
-        $village = $client->getVillage($village_id);
-        $clientObject->setId(addslashes($id));
-        $clientObject->setNom_famille(addslashes($nom_famille));
-        $clientObject->setTelephone_abonne(addslashes($telephone_abonne));
-        $clientObject->setVillage($village);
-        $client->updateClient($clientObject);
+        $chef_villageObject = $chef_village->getChef_village($id);
+        $chef_villageObject = new Chef_village();
+        $village = $chef_village->getVillage($village_id);
+        $chef_villageObject->setId(addslashes($id));
+        $chef_villageObject->setNom_famille(addslashes($nom_famille));
+        $chef_villageObject->setTelephone_abonne(addslashes($telephone_abonne));
+        $chef_villageObject->setVillage($village);
+        $chef_village->updateChef_village($chef_villageObject);
         echo json_encode("Mise à jour effectué avec succès");
    }
    public function delete($id){
-        $client = new ClientRepository();
-        $clientObject = $client->getClient($id);
-        $client->deleteClient($id);
+        $chef_village = new Chef_villageRepository();
+        $chef_villageObject = $chef_village->getChef_village($id);
+        $chef_village->deleteChef_village($id);
         $message = "Suppression reussie";
         echo json_encode($message);
     }

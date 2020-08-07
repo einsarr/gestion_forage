@@ -71,6 +71,7 @@
 
   <script>
     $(document).ready(function() {
+        load_chefs_village();
         load_villages();
         load_clients();
         //CRUD CLIENT
@@ -139,10 +140,8 @@
                 });
             }
         });
-    });
 
-
-    //CRUD VILLAGE
+        //CRUD VILLAGE
         $('#village_form').on('submit', function(event) {
             event.preventDefault();
             if ($('#action').val() == 'Add') {
@@ -183,10 +182,9 @@
                 method: "POST",
                 dataType: "json",
                 success: function(data) {
-                    $('#modalVillaget').modal('show');
-                    $('#village_id').val(data.village);
-                    $('#nom_famille').val(data.nom_famille);
-                    $('#telephone_abonne').val(data.telephone_abonne);
+                    $('#modalVillage').modal('show');
+                    $('#identifiant_village').val(data.identifiant_village);
+                    $('#nom_village').val(data.nom_village);
                     $('#id').val(data.id);
                     $('#action').val("Edit");
                     $('.modal-title').html("Modification d'un village");
@@ -209,7 +207,88 @@
             }
         });
 
+        //CRUD CHEF DE VILLAGE
+        $('#chefs_village_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}Chef_village/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalChef_Village').modal('hide');
+                        $('#chefs_village_form')[0].reset();
+                        load_chefs_village();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "{$url_base}Chef_village/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalChef_Village').modal('hide');
+                        load_chefs_village();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-chef_village', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{$url_base}Chef_village/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalChef_Village').modal('show');
+                    $('#identifiant_village').val(data.identifiant_village);
+                    $('#nom_village').val(data.nom_village);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un chef de village");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-chef_village', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}Village/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_chefs_village();
+                    }
+                });
+            }
+        });
 
+
+    });
+
+
+    
+
+    //Fonction de chargement des chefs de village
+    function load_chefs_village() {
+        $.ajax({
+            url: "{$url_base}Chef_village/load_chefs_villages",
+            dataType: "json",
+            success: function(result) {
+                $('#result-chefs_village').html(result);
+            }
+        });
+    }
     //Fonction de chargement des villages
     function load_villages() {
             $.ajax({

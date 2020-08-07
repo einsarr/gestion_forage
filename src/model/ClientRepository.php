@@ -19,6 +19,13 @@ class ClientRepository extends Model{
 	public function __construct(){
 		parent::__construct();
 	}
+	public function getChef_village($id)
+	{
+		if($this->db != null)
+		{
+			return $this->db->getRepository('Chef_village')->find(array('id' => $id));
+		}
+    }
 	public function getVillage($id)
 	{
 		if($this->db != null)

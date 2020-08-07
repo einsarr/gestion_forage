@@ -13,12 +13,7 @@ class Village
     private $identifiant_village;
     /** @Column(type="string") **/
     private $nom_village;
-    /**
-     * One Village has One Chef_village.
-     * @OneToOne(targetEntity="Chef_village", inversedBy="village")
-     * @JoinColumn(name="chef_village_id", referencedColumnName="id")
-     */
-    private $chef_village;
+  
     
     public function __construct()
     {

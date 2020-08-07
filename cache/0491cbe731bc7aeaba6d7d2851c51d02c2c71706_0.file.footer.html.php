@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-07-27 02:21:18
+/* Smarty version 3.1.30, created on 2020-08-07 00:10:41
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f1e1dfea5e9f5_00992222',
+  'unifunc' => 'content_5f2c7fe1c948a1_30981537',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1595809097,
+      1 => 1596414207,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f1e1dfea5e9f5_00992222 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f2c7fe1c948a1_30981537 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -129,6 +129,7 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
   <?php echo '<script'; ?>
 >
     $(document).ready(function() {
+        load_chefs_village();
         load_villages();
         load_clients();
         //CRUD CLIENT
@@ -201,10 +202,8 @@ Client/delete/" + id,
                 });
             }
         });
-    });
 
-
-    //CRUD VILLAGE
+        //CRUD VILLAGE
         $('#village_form').on('submit', function(event) {
             event.preventDefault();
             if ($('#action').val() == 'Add') {
@@ -248,10 +247,9 @@ Village/edit/" + id,
                 method: "POST",
                 dataType: "json",
                 success: function(data) {
-                    $('#modalVillaget').modal('show');
-                    $('#village_id').val(data.village);
-                    $('#nom_famille').val(data.nom_famille);
-                    $('#telephone_abonne').val(data.telephone_abonne);
+                    $('#modalVillage').modal('show');
+                    $('#identifiant_village').val(data.identifiant_village);
+                    $('#nom_village').val(data.nom_village);
                     $('#id').val(data.id);
                     $('#action').val("Edit");
                     $('.modal-title').html("Modification d'un village");
@@ -275,7 +273,93 @@ Village/delete/" + id,
             }
         });
 
+        //CRUD CHEF DE VILLAGE
+        $('#chefs_village_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Chef_village/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalChef_Village').modal('hide');
+                        $('#chefs_village_form')[0].reset();
+                        load_chefs_village();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Chef_village/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalChef_Village').modal('hide');
+                        load_chefs_village();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-chef_village', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Chef_village/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalChef_Village').modal('show');
+                    $('#identifiant_village').val(data.identifiant_village);
+                    $('#nom_village').val(data.nom_village);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un chef de village");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-chef_village', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Village/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_chefs_village();
+                    }
+                });
+            }
+        });
 
+
+    });
+
+
+    
+
+    //Fonction de chargement des chefs de village
+    function load_chefs_village() {
+        $.ajax({
+            url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Chef_village/load_chefs_villages",
+            dataType: "json",
+            success: function(result) {
+                $('#result-chefs_village').html(result);
+            }
+        });
+    }
     //Fonction de chargement des villages
     function load_villages() {
             $.ajax({

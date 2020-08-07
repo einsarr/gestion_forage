@@ -64,10 +64,10 @@ class Village extends \Village implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Village' . "\0" . 'id', '' . "\0" . 'Village' . "\0" . 'identifiant_village', '' . "\0" . 'Village' . "\0" . 'nom_village', '' . "\0" . 'Village' . "\0" . 'chef_village'];
+            return ['__isInitialized__', '' . "\0" . 'Village' . "\0" . 'id', '' . "\0" . 'Village' . "\0" . 'identifiant_village', '' . "\0" . 'Village' . "\0" . 'nom_village'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Village' . "\0" . 'id', '' . "\0" . 'Village' . "\0" . 'identifiant_village', '' . "\0" . 'Village' . "\0" . 'nom_village', '' . "\0" . 'Village' . "\0" . 'chef_village'];
+        return ['__isInitialized__', '' . "\0" . 'Village' . "\0" . 'id', '' . "\0" . 'Village' . "\0" . 'identifiant_village', '' . "\0" . 'Village' . "\0" . 'nom_village'];
     }
 
     /**

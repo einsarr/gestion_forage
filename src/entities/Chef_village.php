@@ -13,23 +13,18 @@ class Chef_village
     private $prenom_chef_village;
     /** @Column(type="string") **/
     private $telephone_chef_village;
-   /**
-     * One Chef has One Village.
-     * @OneToOne(targetEntity="Village", inversedBy="chef_village")
+   
+    /**
+     * One Chef_village has many clients. This is the inverse side.
+     * @OneToMany(targetEntity="Client", mappedBy="chef_village")
+     */
+    private $clients;
+      /**
+     * One Chef_village has One Village.
+     * @OneToOne(targetEntity="Village")
      * @JoinColumn(name="village_id", referencedColumnName="id")
      */
     private $village;
-    /**
-     * One Chef_village has many clients. This is the inverse side.
-     * @OneToMany(targetEntity="Village", mappedBy="chef_village")
-     */
-    private $clients;
-     /**
-     * One Chef_village has One Client.
-     * @OneToOne(targetEntity="Client", inversedBy="chef_village")
-     * @JoinColumn(name="client_id", referencedColumnName="id")
-     */
-    private $client;
 
     public function __construct()
     {
@@ -59,6 +54,14 @@ class Chef_village
     public function setTelephone_chef_village($telephone_chef_village)
     {
         $this->telephone_chef_village = $telephone_chef_village;
+    }
+    public function getVillage()
+    {
+        return $this->village;
+    }
+    public function setVillage($village)
+    {
+        $this->village = $village;
     }
 
     public function hasRole($nom)

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-07-27 02:21:18
+/* Smarty version 3.1.30, created on 2020-08-03 01:28:09
   from "C:\xampp\htdocs\gestion_forage\src\view\villages\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f1e1dfe9cadb0_77934584',
+  'unifunc' => 'content_5f274c09965b75_43918262',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bd269e28f0d94597c3d7f09223886744ebfc87ce' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\villages\\liste.html',
-      1 => 1595809160,
+      1 => 1596410887,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f1e1dfe9cadb0_77934584 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f274c09965b75_43918262 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -47,7 +47,6 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                     <th>N°</th>
                     <th>Village</th>
                     <th>code du village</th>
-                    <th>Prénom du chef de village</th>
                     <th>Options</th>
                 </tr>
             </thead>
@@ -65,7 +64,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
 
   <div class="modal fade" id="modalVillage">
     <div class="modal-dialog">
-        <form method="post" id="client_form">
+        <form method="post" id="village_form">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title text-primary">Ajout d'un village</h4>
@@ -76,34 +75,13 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                 </div>
                 
                 <div class="modal-body">
-                    
                     <div class="form-group">
-                        <label>Village</label>
-                        <select class="form-control" name="village_id" id="village_id">
-                            <option value="">---Choisir le chef du village---</option>
-                            <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['chefs_village']->value, 'chef_village');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['chef_village']->value) {
-?>-->
-                            <option value="<?php echo $_smarty_tpl->tpl_vars['chef_village']->value->getId();?>
-"><?php echo $_smarty_tpl->tpl_vars['chef_village']->value->getNom_chef_village();?>
-</option>
-                            <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
-                        </select>
+                        <label>Identifiant du village</label>
+                        <input type="text" name="identifiant_village" id="identifiant_village" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Nom de famille</label>
-                        <input type="text" name="nom_famille" id="nom_famille" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Téléphone abonné</label>
-                        <input type="text" name="telephone_abonne" id="telephone_abonne" class="form-control" placeholder="Numéro de téléphone" required>
+                        <label>Nom du village</label>
+                        <input type="text" name="nom_village" id="nom_village" class="form-control" placeholder="Numéro de téléphone" required>
                     </div>
                 </div>
                 <div class="modal-footer">

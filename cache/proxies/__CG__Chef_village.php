@@ -64,10 +64,10 @@ class Chef_village extends \Chef_village implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Chef_village' . "\0" . 'id', '' . "\0" . 'Chef_village' . "\0" . 'prenom_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'telephone_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'village', '' . "\0" . 'Chef_village' . "\0" . 'clients', '' . "\0" . 'Chef_village' . "\0" . 'client'];
+            return ['__isInitialized__', '' . "\0" . 'Chef_village' . "\0" . 'id', '' . "\0" . 'Chef_village' . "\0" . 'prenom_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'telephone_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'clients', '' . "\0" . 'Chef_village' . "\0" . 'village'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Chef_village' . "\0" . 'id', '' . "\0" . 'Chef_village' . "\0" . 'prenom_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'telephone_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'village', '' . "\0" . 'Chef_village' . "\0" . 'clients', '' . "\0" . 'Chef_village' . "\0" . 'client'];
+        return ['__isInitialized__', '' . "\0" . 'Chef_village' . "\0" . 'id', '' . "\0" . 'Chef_village' . "\0" . 'prenom_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'telephone_chef_village', '' . "\0" . 'Chef_village' . "\0" . 'clients', '' . "\0" . 'Chef_village' . "\0" . 'village'];
     }
 
     /**
@@ -241,6 +241,28 @@ class Chef_village extends \Chef_village implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTelephone_chef_village', [$telephone_chef_village]);
 
         return parent::setTelephone_chef_village($telephone_chef_village);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getVillage()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVillage', []);
+
+        return parent::getVillage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVillage($village)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVillage', [$village]);
+
+        return parent::setVillage($village);
     }
 
     /**

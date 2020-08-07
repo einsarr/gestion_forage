@@ -14,11 +14,11 @@ class Client
     /** @Column(type="string") **/
     private $telephone_abonne;
      /**
-     * Many Clients have one village. This is the owning side.
-     * @ManyToOne(targetEntity="Village", inversedBy="clients")
-     * @JoinColumn(name="village_id", referencedColumnName="id")
+     * Many Clients have one chef_village. This is the owning side.
+     * @ManyToOne(targetEntity="Chef_village", inversedBy="clients")
+     * @JoinColumn(name="chef_village_id", referencedColumnName="id")
      */
-    private $village;
+    private $chef_village;
     /**
      * One Client has many Abonnement. This is the inverse side.
      * @OneToMany(targetEntity="Abonnement", mappedBy="client")
@@ -54,15 +54,6 @@ class Client
     public function setTelephone_abonne($telephone_abonne)
     {
         $this->telephone_abonne = $telephone_abonne;
-    }
-
-    public function getVillage()
-    {
-        return $this->village;
-    }
-    public function setVillage($village)
-    {
-        $this->village = $village;
     }
     
     public function getChef_village()

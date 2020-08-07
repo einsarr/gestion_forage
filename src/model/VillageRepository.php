@@ -66,13 +66,8 @@ class VillageRepository extends Model{
 			$u = $this->db->find('Village', $village->getId());
 			if($u != null)
 			{
-				$u->setNom($village->getNom());
-				$u->setPrenom($village->getPrenom());
-                $u->setEmail($village->getEmail());
-                $u->setPassword($village->getPassword());
-                $u->setPassword($village->getPassword());
-                $u->setPassword($village->getPassword());
-                $u->setRoles($village->getRoles());
+				$u->setIdentifiant_village($village->getIdentifiant_village());
+				$u->setNom_village($village->getNom_village());
 				$this->db->flush();
 
 			}else {
@@ -84,7 +79,7 @@ class VillageRepository extends Model{
 	public function listeVillages(){
 		if($this->db != null)
 		{
-			return $this->db->createQuery("SELECT u FROM Village u")->getResult();// array of Village objects
+			return $this->db->createQuery("SELECT v FROM Village v")->getResult();// array of Village objects
 		}
 	}
 	

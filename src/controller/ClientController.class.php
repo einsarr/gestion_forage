@@ -3,6 +3,7 @@ use libs\system\Controller;
 use src\model\UserRepository;
 use src\model\ClientRepository;
 use src\model\VillageRepository;
+use src\model\Chef_villageRepository;
 class ClientController extends Controller
 {
     private $data;
@@ -24,6 +25,10 @@ class ClientController extends Controller
 
         $villagedb = new VillageRepository();
         $this->data['villages'] = $villagedb->listeVillages();
+
+        $chef_villagedb = new Chef_villageRepository();
+        $this->data['chefs_village'] = $chef_villagedb->liste_chef_Villages();
+
         return $this->view->load("clients/liste", $this->data);
     }
     public function load_clients()
@@ -38,7 +43,8 @@ class ClientController extends Controller
                     <td>".++$num."</td>
                     <td>".$value->getNom_famille()."</td>
                     <td>".$value->getTelephone_abonne()."</td>
-                    <td>".$value->getVillage()->getNom_village()."</td>
+                    <td>".$value->getChef_Village()->getVillage()->getNom_village()."</td>
+                    <td>".$value->getChef_Village()->getPrenom_chef_village()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-client'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-client'><span class='fa fa-trash'></span></button>
@@ -51,10 +57,10 @@ class ClientController extends Controller
         $client = new ClientRepository();
         extract($_POST);
         $clientObject = new Client();
-        $village = $client->getVillage($village_id);
+        $chef_village = $client->getChef_village($chef_village_id);
         $clientObject->setNom_famille(addslashes($nom_famille));
         $clientObject->setTelephone_abonne(addslashes($telephone_abonne));
-        $clientObject->setVillage($village);
+        $clientObject->setChef_village($chef_village);
 
         $client->addClient($clientObject);
         echo json_encode("ajout réussie avec succès");

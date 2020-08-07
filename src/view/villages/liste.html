@@ -20,7 +20,6 @@
                     <th>N°</th>
                     <th>Village</th>
                     <th>code du village</th>
-                    <th>Prénom du chef de village</th>
                     <th>Options</th>
                 </tr>
             </thead>
@@ -38,7 +37,7 @@
 
   <div class="modal fade" id="modalVillage">
     <div class="modal-dialog">
-        <form method="post" id="client_form">
+        <form method="post" id="village_form">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title text-primary">Ajout d'un village</h4>
@@ -49,23 +48,13 @@
                 </div>
                 
                 <div class="modal-body">
-                    
                     <div class="form-group">
-                        <label>Village</label>
-                        <select class="form-control" name="chef_village_id" id="chef_village_id">
-                            <option value="">---Choisir le chef du village---</option>
-                            {foreach from=$chefs_village item=chef_village}-->
-                            <option value="{$chef_village->getId()}">{$chef_village->getNom_chef_village()}</option>
-                            {/foreach}
-                        </select>
+                        <label>Identifiant du village</label>
+                        <input type="text" name="identifiant_village" id="identifiant_village" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Nom de famille</label>
-                        <input type="text" name="nom_famille" id="nom_famille" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Téléphone abonné</label>
-                        <input type="text" name="telephone_abonne" id="telephone_abonne" class="form-control" placeholder="Numéro de téléphone" required>
+                        <label>Nom du village</label>
+                        <input type="text" name="nom_village" id="nom_village" class="form-control" placeholder="Numéro de téléphone" required>
                     </div>
                 </div>
                 <div class="modal-footer">

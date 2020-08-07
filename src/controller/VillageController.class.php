@@ -22,8 +22,8 @@ class VillageController extends Controller
         $userdb = new UserRepository();
         $this->data['users'] = $userdb->listeUser();
 
-        $chef_villagedb = new Chef_villageRepository();
-        $this->data['chefs_village'] = $chef_villagedb->liste_chefs_village();
+        //$chef_villagedb = new Chef_villageRepository();
+       // $this->data['chefs_village'] = $chef_villagedb->liste_chefs_village();
         return $this->view->load("villages/liste", $this->data);
     }
     public function load_villages()
@@ -38,7 +38,6 @@ class VillageController extends Controller
                     <td>".++$num."</td>
                     <td>".$value->getNom_village()."</td>
                     <td>".$value->getIdentifiant_village()."</td>
-                    <td></td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-village'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-village'><span class='fa fa-trash'></span></button>
@@ -51,43 +50,36 @@ class VillageController extends Controller
         $village = new VillageRepository();
         extract($_POST);
         $villageObject = new Village();
-        $chef_village = $village->getVillage($chef_village_id);
-        $villageObject->setPrenom_chef_village(addslashes($prenom_chef_village));
         $villageObject->setIdentifiant_village(addslashes($identifiant_village));
         $villageObject->setNom_village(addslashes($nom_village));
-        $villageObject->setChef_village($chef_village);
 
-        $client->addVillage($villageObject);
+        $village->addVillage($villageObject);
         echo json_encode("ajout réussie avec succès");
    }
    public function edit($id){
         $village = new VillageRepository();
-        $data = $village->getClient($id);
+        $data = $village->getVillage($id);
         $output = array(
             'id' => $data->getId(),
-            'village' => $data->getVillage()->getId(),
-            'nom_famille' => $data->getNom_famille(),
-            'telephone_abonne' => $data->getTelephone_abonne(),
+            'identifiant_village' => $data->getIdentifiant_village(),
+            'nom_village' => $data->getNom_village(),
         );
         echo json_encode($output);
     }
     public function update(){
-        $client = new ClientRepository();
+        $village = new VillageRepository();
         extract($_POST);
-        $clientObject = $client->getClient($id);
-        $clientObject = new Client();
-        $village = $client->getVillage($village_id);
-        $clientObject->setId(addslashes($id));
-        $clientObject->setNom_famille(addslashes($nom_famille));
-        $clientObject->setTelephone_abonne(addslashes($telephone_abonne));
-        $clientObject->setVillage($village);
-        $client->updateClient($clientObject);
+        $villageObject = new Village();
+        $villageObject->setId(addslashes($id));
+        $villageObject->setIdentifiant_village(addslashes($identifiant_village));
+        $villageObject->setNom_village(addslashes($nom_village));
+        $village->updateVillage($villageObject);
         echo json_encode("Mise à jour effectué avec succès");
    }
    public function delete($id){
-        $client = new ClientRepository();
-        $clientObject = $client->getClient($id);
-        $client->deleteClient($id);
+        $village = new VillageRepository();
+        $villageObject = $village->getVillage($id);
+        $village->deleteVillage($id);
         $message = "Suppression reussie";
         echo json_encode($message);
     }
