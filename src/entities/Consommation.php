@@ -9,16 +9,16 @@ class Consommation
 {
     /** @Id @Column(type="integer") @GeneratedValue **/
     private $id;
-    /** @Column(type="string") **/
+    /** @Column(type="integer") **/
     private $nombre_litre_consomme;
     /** @Column(type="string") **/
     private $code_consommation;
-     /** @Column(type="date") **/
-     private $date_consommation;
-     /** @Column(type="decimal") **/
-     private $prix_litre_eau;
-     /**
-     * Many Consommation have one Compteur. This is the owning side.
+    /** @Column(type="string") **/
+    private $date_consommation;
+    /** @Column(type="decimal") **/
+    private $prix_litre_eau;
+    /**
+     * Many Consommations have one Compteur. This is the owning side.
      * @ManyToOne(targetEntity="Compteur", inversedBy="consommations")
      * @JoinColumn(name="compteur_id", referencedColumnName="id")
      */
@@ -27,7 +27,7 @@ class Consommation
      * One Consommation has One Cart.
      * @OneToOne(targetEntity="Facturation", mappedBy="consommation")
      */
-    private $facturation;
+    //private $facturation;
     
     public function __construct()
     {

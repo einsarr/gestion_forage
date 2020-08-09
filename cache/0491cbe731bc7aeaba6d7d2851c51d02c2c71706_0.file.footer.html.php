@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-09 23:49:29
+/* Smarty version 3.1.30, created on 2020-08-10 00:35:46
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f306f69aca221_89190883',
+  'unifunc' => 'content_5f307a42969677_99025485',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1597009767,
+      1 => 1597010521,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f306f69aca221_89190883 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f307a42969677_99025485 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -134,6 +134,7 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
         load_clients();
         load_abonnements();
         load_compteurs();
+        load_consommations();
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -483,9 +484,91 @@ Compteur/delete/" + id,
             }
         });
 
+          //CRUD CONSOMMATION
+        $('#consommation_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalConsommation').modal('hide');
+                        $('#consommation_form')[0].reset();
+                        load_consommations();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalConsommation').modal('hide');
+                        load_consommations();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-consommation', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalConsommation').modal('show');
+                    $('#compteur_id').val(data.compteur);
+                    $('#nombre_litre_consomme').val(data.nombre_litre_consomme);
+                    $('#code_consommation').val(data.code_consommation);
+                    $('#date_consommation').val(data.date_consommation);
+                    $('#prix_litre_eau').val(data.prix_litre_eau);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'une consommation");
+                }
+            });
+        });
+        $(document).on('click', '.delete-consommation', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_consommations();
+                    }
+                });
+            }
+        });
 
     });
     
+    //Fonction de chargement les consommations
+    function load_consommations() {
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Consommation/load_consommations",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-consommations').html(result);
+                }
+            });
+        }
     //Fonction de chargement les compteurs
     function load_compteurs() {
             $.ajax({

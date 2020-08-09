@@ -56,8 +56,6 @@ class Compteur
         $this->etat_compteur = $etat_compteur;
     }
 
-   
-
     public function getAbonnement()
     {
         return $this->abonnement;
@@ -65,6 +63,15 @@ class Compteur
     public function setAbonnement($abonnement)
     {
         $this->abonnement = $abonnement;
+    }
+
+    public function getConsommations()
+    {
+        return $this->consommations;
+    }
+    public function setConsommations($consommations)
+    {
+        $this->consommations = $consommations;
     }
 
 }
