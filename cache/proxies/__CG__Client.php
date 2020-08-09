@@ -64,10 +64,10 @@ class Client extends \Client implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Client' . "\0" . 'id', '' . "\0" . 'Client' . "\0" . 'nom_famille', '' . "\0" . 'Client' . "\0" . 'telephone_abonne', '' . "\0" . 'Client' . "\0" . 'village', '' . "\0" . 'Client' . "\0" . 'abonnements'];
+            return ['__isInitialized__', '' . "\0" . 'Client' . "\0" . 'id', '' . "\0" . 'Client' . "\0" . 'nom_famille', '' . "\0" . 'Client' . "\0" . 'telephone_abonne', '' . "\0" . 'Client' . "\0" . 'chef_village', '' . "\0" . 'Client' . "\0" . 'abonnements'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Client' . "\0" . 'id', '' . "\0" . 'Client' . "\0" . 'nom_famille', '' . "\0" . 'Client' . "\0" . 'telephone_abonne', '' . "\0" . 'Client' . "\0" . 'village', '' . "\0" . 'Client' . "\0" . 'abonnements'];
+        return ['__isInitialized__', '' . "\0" . 'Client' . "\0" . 'id', '' . "\0" . 'Client' . "\0" . 'nom_famille', '' . "\0" . 'Client' . "\0" . 'telephone_abonne', '' . "\0" . 'Client' . "\0" . 'chef_village', '' . "\0" . 'Client' . "\0" . 'abonnements'];
     }
 
     /**
@@ -241,28 +241,6 @@ class Client extends \Client implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTelephone_abonne', [$telephone_abonne]);
 
         return parent::setTelephone_abonne($telephone_abonne);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getVillage()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVillage', []);
-
-        return parent::getVillage();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setVillage($village)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVillage', [$village]);
-
-        return parent::setVillage($village);
     }
 
     /**

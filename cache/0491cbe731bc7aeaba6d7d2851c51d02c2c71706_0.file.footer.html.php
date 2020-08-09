@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-07 00:10:41
+/* Smarty version 3.1.30, created on 2020-08-09 22:41:07
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f2c7fe1c948a1_30981537',
+  'unifunc' => 'content_5f305f63e30a84_80640204',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1596414207,
+      1 => 1597005663,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f2c7fe1c948a1_30981537 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f305f63e30a84_80640204 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -132,6 +132,7 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
         load_chefs_village();
         load_villages();
         load_clients();
+        load_abonnements();
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -343,10 +344,93 @@ Village/delete/" + id,
             }
         });
 
+        //CRUD ABONNEMENT
+        $('#abonnement_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalAbonnement').modal('hide');
+                        $('#abonnement_form')[0].reset();
+                        load_abonnements();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalAbonnement').modal('hide');
+                        load_abonnements();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-abonnement', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalAbonnement').modal('show');
+                    $('#client_id').val(data.client);
+                    $('#numero_abonnement').val(data.numero_abonnement);
+                    $('#description_abonnement').html(data.description_abonnement);
+                    $('#date_abonnement').val(data.date_abonnement);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un abonnement");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-abonnement', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_abonnements();
+                    }
+                });
+            }
+        });
+
 
     });
 
 
+    //Fonction de chargement les abonnements
+    function load_abonnements() {
+        $.ajax({
+            url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/load_abonnements",
+            dataType: "json",
+            success: function(result) {
+                $('#result-abonnements').html(result);
+            }
+        });
+    }
     
 
     //Fonction de chargement des chefs de village

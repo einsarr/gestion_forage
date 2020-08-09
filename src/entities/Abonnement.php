@@ -13,6 +13,8 @@ class Abonnement
     private $date_abonnement;
     /** @Column(type="string") **/
     private $description_abonnement;
+    /** @Column(type="string") **/
+    private $numero_abonnement;
    /**
      * Many Abonnement have one Client. This is the owning side.
      * @ManyToOne(targetEntity="Client", inversedBy="abonnements")
@@ -31,7 +33,15 @@ class Abonnement
     {
         $this->id = $id;
     }
-
+    
+    public function getNumero_abonnement()
+    {
+        return $this->numero_abonnement;
+    }
+    public function setNumero_abonnement($numero_abonnement)
+    {
+        $this->numero_abonnement = $numero_abonnement;
+    }
     public function getDate_abonnement()
     {
         return $this->date_abonnement;

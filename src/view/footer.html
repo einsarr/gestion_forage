@@ -74,6 +74,7 @@
         load_chefs_village();
         load_villages();
         load_clients();
+        load_abonnements();
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -273,10 +274,88 @@
             }
         });
 
+        //CRUD ABONNEMENT
+        $('#abonnement_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}Abonnement/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalAbonnement').modal('hide');
+                        $('#abonnement_form')[0].reset();
+                        load_abonnements();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "{$url_base}Abonnement/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalAbonnement').modal('hide');
+                        load_abonnements();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-abonnement', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{$url_base}Abonnement/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalAbonnement').modal('show');
+                    $('#client_id').val(data.client);
+                    $('#numero_abonnement').val(data.numero_abonnement);
+                    $('#description_abonnement').html(data.description_abonnement);
+                    $('#date_abonnement').val(data.date_abonnement);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un abonnement");
+                }
+            });
+        });
+        
+        $(document).on('click', '.delete-abonnement', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}Abonnement/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_abonnements();
+                    }
+                });
+            }
+        });
+
 
     });
 
 
+    //Fonction de chargement les abonnements
+    function load_abonnements() {
+        $.ajax({
+            url: "{$url_base}Abonnement/load_abonnements",
+            dataType: "json",
+            success: function(result) {
+                $('#result-abonnements').html(result);
+            }
+        });
+    }
     
 
     //Fonction de chargement des chefs de village
