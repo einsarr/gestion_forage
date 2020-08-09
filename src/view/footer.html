@@ -75,6 +75,7 @@
         load_villages();
         load_clients();
         load_abonnements();
+        load_compteurs();
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -126,7 +127,6 @@
                 }
             });
         });
-        
         $(document).on('click', '.delete-client', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -192,7 +192,6 @@
                 }
             });
         });
-        
         $(document).on('click', '.delete-village', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -258,7 +257,6 @@
                 }
             });
         });
-        
         $(document).on('click', '.delete-chef_village', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -326,7 +324,6 @@
                 }
             });
         });
-        
         $(document).on('click', '.delete-abonnement', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -342,10 +339,85 @@
             }
         });
 
+         //CRUD COMPTEURS
+        $('#compteur_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}Compteur/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalCompteur').modal('hide');
+                        $('#compteur_form')[0].reset();
+                        load_compteurs();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "{$url_base}Compteur/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalCompteur').modal('hide');
+                        load_compteurs();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-compteur', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{$url_base}Compteur/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalCompteur').modal('show');
+                    $('#abonnement_id').val(data.abonnement);
+                    $('#numero_compteur').val(data.numero_compteur);
+                    $('#etat_compteur').val(data.etat_compteur);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un compteur");
+                }
+            });
+        });
+        $(document).on('click', '.delete-compteur', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}Compteur/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_compteurs();
+                    }
+                });
+            }
+        });
+
 
     });
-
-
+    
+    //Fonction de chargement les compteurs
+    function load_compteurs() {
+            $.ajax({
+                url: "{$url_base}Compteur/load_compteurs",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-compteurs').html(result);
+                }
+            });
+        }
     //Fonction de chargement les abonnements
     function load_abonnements() {
         $.ajax({
@@ -356,8 +428,6 @@
             }
         });
     }
-    
-
     //Fonction de chargement des chefs de village
     function load_chefs_village() {
         $.ajax({

@@ -11,11 +11,11 @@ class Compteur
     private $id;
     /** @Column(type="string") **/
     private $numero_compteur;
-    /** @Column(type="integer") **/
+    /** @Column(type="string") **/
     private $etat_compteur;
      /**
      * One Compteur has One Abonnement.
-     * @OneToOne(targetEntity="Abonnement", inversedBy="compteur")
+     * @OneToOne(targetEntity="Abonnement")
      * @JoinColumn(name="abonnement_id", referencedColumnName="id")
      */
     private $abonnement;

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-09 22:41:07
+/* Smarty version 3.1.30, created on 2020-08-09 23:49:29
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f305f63e30a84_80640204',
+  'unifunc' => 'content_5f306f69aca221_89190883',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1597005663,
+      1 => 1597009767,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f305f63e30a84_80640204 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f306f69aca221_89190883 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -133,6 +133,7 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
         load_villages();
         load_clients();
         load_abonnements();
+        load_compteurs();
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -187,7 +188,6 @@ Client/edit/" + id,
                 }
             });
         });
-        
         $(document).on('click', '.delete-client', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -257,7 +257,6 @@ Village/edit/" + id,
                 }
             });
         });
-        
         $(document).on('click', '.delete-village', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -327,7 +326,6 @@ Chef_village/edit/" + id,
                 }
             });
         });
-        
         $(document).on('click', '.delete-chef_village', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -399,7 +397,6 @@ Abonnement/edit/" + id,
                 }
             });
         });
-        
         $(document).on('click', '.delete-abonnement', function() {
             var id = $(this).attr("id");
             if (confirm("Etes vous sure de vouloir supprimer ?")) {
@@ -416,10 +413,90 @@ Abonnement/delete/" + id,
             }
         });
 
+         //CRUD COMPTEURS
+        $('#compteur_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalCompteur').modal('hide');
+                        $('#compteur_form')[0].reset();
+                        load_compteurs();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalCompteur').modal('hide');
+                        load_compteurs();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-compteur', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalCompteur').modal('show');
+                    $('#abonnement_id').val(data.abonnement);
+                    $('#numero_compteur').val(data.numero_compteur);
+                    $('#etat_compteur').val(data.etat_compteur);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un compteur");
+                }
+            });
+        });
+        $(document).on('click', '.delete-compteur', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_compteurs();
+                    }
+                });
+            }
+        });
+
 
     });
-
-
+    
+    //Fonction de chargement les compteurs
+    function load_compteurs() {
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Compteur/load_compteurs",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-compteurs').html(result);
+                }
+            });
+        }
     //Fonction de chargement les abonnements
     function load_abonnements() {
         $.ajax({
@@ -431,8 +508,6 @@ Abonnement/load_abonnements",
             }
         });
     }
-    
-
     //Fonction de chargement des chefs de village
     function load_chefs_village() {
         $.ajax({
