@@ -9,13 +9,13 @@ class Facturation
 {
     /** @Id @Column(type="integer") @GeneratedValue **/
     private $id;
-    /** @Column(type="date") **/
+    /** @Column(type="string") **/
     private $date_facturation;
     /** @Column(type="string") **/
     private $date_limite_paiement;
      /**
      * One Facture has One Consommation.
-     * @OneToOne(targetEntity="Consommation", inversedBy="facture")
+     * @OneToOne(targetEntity="Consommation")
      * @JoinColumn(name="consommation_id", referencedColumnName="id")
      */
     private $consommation;
