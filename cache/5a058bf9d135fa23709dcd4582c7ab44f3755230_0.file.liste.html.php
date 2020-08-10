@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 02:43:31
-  from "C:\xampp\htdocs\gestion_forage\src\view\abonnements\liste.html" */
+/* Smarty version 3.1.30, created on 2020-08-10 02:43:21
+  from "C:\xampp\htdocs\gestion_forage\src\view\clients\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f3098338cd4c1_38553897',
+  'unifunc' => 'content_5f3098292eeb81_38779511',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'b87c6d05085ad7d57c0ff7aca339dbe008cf042e' => 
+    '5a058bf9d135fa23709dcd4582c7ab44f3755230' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\abonnements\\liste.html',
-      1 => 1597016177,
+      0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\clients\\liste.html',
+      1 => 1596758475,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f3098338cd4c1_38553897 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f3098292eeb81_38779511 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -30,14 +30,14 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAbonnement">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalClient">
 		<i class="fas fa-plus"></i> Nouveau
 	  </button><br><br>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">LISTE DES ABONNEMENTS</h6>
+        <h6 class="m-0 font-weight-bold text-primary">LISTE DES CLIENTS</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -45,14 +45,14 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
             <thead>
                 <tr>
                     <th>N°</th>
-                    <th>Numéro abonnement</th>
-                    <th>Date abonnement</th>
-                    <th>Client</th>
-                    <th>Description</th>
+                    <th>Nom de famille</th>
+                    <th>Téléphone</th>
+                    <th>Village</th>
+                    <th>Chef</th>
                     <th>Options</th>
                 </tr>
             </thead>
-            <tbody id="result-abonnements">
+            <tbody id="result-clients">
 
             </tbody>
           </table>
@@ -64,12 +64,12 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
   <!-- /.container-fluid -->
 
 
-  <div class="modal fade" id="modalAbonnement">
+  <div class="modal fade" id="modalClient">
     <div class="modal-dialog">
-        <form method="post" id="abonnement_form">
+        <form method="post" id="client_form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-primary">Ajout d'un Abonnement</h4>
+                    <h4 class="modal-title text-primary">Ajout d'un client</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -78,28 +78,24 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                 
                 <div class="modal-body">
                     <div class="form-group">
-                      <label>Numéro</label>
-                      <input type="text" name="numero_abonnement" id="numero_abonnement" class="form-control" required>
+                        <label>Nom de famille</label>
+                        <input type="text" name="nom_famille" id="nom_famille" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Date d'abonnement</label>
-                        <input type="date" name="date_abonnement" id="date_abonnement" class="form-control" required>
+                        <label>Téléphone abonné</label>
+                        <input type="text" name="telephone_abonne" id="telephone_abonne" class="form-control" placeholder="Numéro de téléphone" required>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description_abonnement" id="" cols="30" rows="3" id="description_abonnement" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Le client</label>
-                      <select class="form-control" name="client_id" id="client_id">
-                          <option value="">---Choisir le client---</option>
+                      <label>Le chef de village</label>
+                      <select class="form-control" name="chef_village_id" id="chef_village_id">
+                          <option value="">---Choisir le chef de village---</option>
                           <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['clients']->value, 'client');
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['chefs_village']->value, 'chef');
 if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['client']->value) {
+foreach ($_from as $_smarty_tpl->tpl_vars['chef']->value) {
 ?>
-                          <option value="<?php echo $_smarty_tpl->tpl_vars['client']->value->getId();?>
-"><?php echo $_smarty_tpl->tpl_vars['client']->value->getNom_famille();?>
+                          <option value="<?php echo $_smarty_tpl->tpl_vars['chef']->value->getId();?>
+"><?php echo $_smarty_tpl->tpl_vars['chef']->value->getPrenom_chef_village();?>
 </option>
                           <?php
 }

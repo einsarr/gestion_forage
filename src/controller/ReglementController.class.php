@@ -47,6 +47,7 @@ class ReglementController extends Controller
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-reglement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-reglement'><span class='fa fa-trash'></span></button>
+                        <button type='button' name='impression' id='".$value->getId()."' class='btn btn-default btn-xs imprime-reglement'><span class='fa fa-print'></span></button>
                     </td>
                 </tr>";
         }
@@ -75,6 +76,7 @@ class ReglementController extends Controller
         }
         $reglementObject->setEtat_reglement(addslashes($etat_reglement));
         $reglementObject->setDate_reglement(addslashes(date("Y-m-d")));
+        $reglementObject->setTaxe(addslashes(0.0));
         $reglementObject->setFacturation($facturation);
 
        
