@@ -3,14 +3,14 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAbonnement">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReglement">
 		<i class="fas fa-plus"></i> Nouveau
 	  </button><br><br>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">LISTE DES ABONNEMENTS</h6>
+        <h6 class="m-0 font-weight-bold text-primary">LISTE DES REGLEMENETS</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -18,14 +18,16 @@
             <thead>
                 <tr>
                     <th>N°</th>
-                    <th>Numéro abonnement</th>
-                    <th>Date abonnement</th>
-                    <th>Client</th>
-                    <th>Description</th>
+                    <th>Etat</th>
+                    <th>Date limite</th>
+                    <th>Date du reglement</th>
+                    <th>Facturation</th>
+                    <th>Taxe</th>
+                    <th>Montant</th>
                     <th>Options</th>
                 </tr>
             </thead>
-            <tbody id="result-abonnements">
+            <tbody id="result-reglements">
 
             </tbody>
           </table>
@@ -37,12 +39,12 @@
   <!-- /.container-fluid -->
 
 
-  <div class="modal fade" id="modalAbonnement">
+  <div class="modal fade" id="modalReglement">
     <div class="modal-dialog">
-        <form method="post" id="abonnement_form">
+        <form method="post" id="reglement_form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-primary">Ajout d'un Abonnement</h4>
+                    <h4 class="modal-title text-primary">Ajout d'un Reglement</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -51,23 +53,20 @@
                 
                 <div class="modal-body">
                     <div class="form-group">
-                      <label>Numéro</label>
-                      <input type="text" name="numero_abonnement" id="numero_abonnement" class="form-control" required>
+                      <label>Etat reglement</label>
+                      <select name="etat_reglement" id="etat_reglement" class="form-control">
+                        <option value="">Selectionner l'état</option>
+                        <option value="Réglé">Réglé</option>
+                        <option value="Non réglé">Non réglé</option>
+                      </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label>Date d'abonnement</label>
-                        <input type="date" name="date_abonnement" id="date_abonnement" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description_abonnement" id="" cols="30" rows="3" id="description_abonnement" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Le client</label>
-                      <select class="form-control" name="client_id" id="client_id">
-                          <option value="">---Choisir le client---</option>
-                          {foreach from=$clients item=client}
-                          <option value="{$client->getId()}">{$client->getNom_famille()}</option>
+                      <label>La facture</label>
+                      <select class="form-control" name="facturation_id" id="facturation_id">
+                          <option value="">---Choisir la facturation---</option>
+                          {foreach from=$facturations item=facturation}
+                          <option value="{$facturation->getId()}">{$facturation->getConsommation()->getNombre_litre_consomme() * $facturation->getConsommation()->getPrix_litre_eau()}</option>
                           {/foreach}
                       </select>
                   </div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 01:28:13
+/* Smarty version 3.1.30, created on 2020-08-10 01:57:19
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f30868d6a4764_28611489',
+  'unifunc' => 'content_5f308d5fbb2d15_98210051',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1597015691,
+      1 => 1597016734,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f30868d6a4764_28611489 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f308d5fbb2d15_98210051 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -136,6 +136,7 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
         load_compteurs();
         load_consommations();
         load_facturations();
+        load_reglements(),
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -627,8 +628,88 @@ Facturation/delete/" + id,
             }
         });
        
+       //CRUD REGLEMENT
+       $('#reglement_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalReglement').modal('hide');
+                        $('#reglement_form')[0].reset();
+                        load_reglements();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalReglement').modal('hide');
+                        load_reglements();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-reglement', function() {
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalReglement').modal('show');
+                    $('#facturation_id').val(data.facturation);
+                    $('#etat_reglement').val(data.etat_reglement);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un facturation");
+                }
+            });
+        });
+        $(document).on('click', '.delete-reglement', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_reglements();
+                    }
+                });
+            }
+        });
+       
     });
     
+    //Fonction de chargement les facturation
+    function load_reglements() {
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Reglement/load_reglements",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-reglements').html(result);
+                }
+            });
+        }
     //Fonction de chargement les facturation
     function load_facturations() {
             $.ajax({
