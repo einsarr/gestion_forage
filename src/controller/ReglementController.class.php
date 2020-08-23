@@ -48,7 +48,6 @@ class ReglementController extends Controller
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-reglement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-reglement'><span class='fa fa-trash'></span></button>
-                        <button type='button' name='impression' id='".$value->getId()."' class='btn btn-default btn-xs imprime-reglement'><span class='fa fa-print'></span></button>
                         <a href='http://localhost:8081/gestion_forage/Reglement/generate/'".$value->getId()."'><span class='fa fa-print'></span></a>
                     </td>
                 </tr>";
@@ -122,17 +121,40 @@ class ReglementController extends Controller
         $pdf = new SamanePdf();
 
         $htmlDataFormat = '<center>
-                    <h1>FACTURE D\'EAU</h1>
-                    <h3>Date d\'édition : '.date('d m Y h:i:s').'</h3>
-                    <img src="public/folder/image/sen_forage.jpg"/>
+                    <h1 style="color:blue;"><u>REGLEMENT DE FACTURE</u></h1>
+                    <h3><u>Date d\'édition : </u>'.date('d/m/Y h:i:s').'</h3>
                 </center>';
         $reglement = new ReglementRepository();
         $reglementObject = $reglement->getReglement($reglement_id);
+        $htmlDataFormat = $htmlDataFormat . '<hr>';
+
+
+
+        $nbre_de_litre_consomme =$reglementObject->getFacturation()->getConsommation()->getNombre_litre_consomme();
+        $prix_du_litre = $reglementObject->getFacturation()->getConsommation()->getPrix_litre_eau();
+        $total =$nbre_de_litre_consomme * $prix_du_litre;
+
+        $numero_abonnement = $reglementObject->getFacturation()->getConsommation()->getCompteur()->getAbonnement()->getNumero_abonnement();
+        $nom_famille_client = $reglementObject->getFacturation()->getConsommation()->getCompteur()->getAbonnement()->getClient()->getNom_famille();
+        $telephone_client_client = $reglementObject->getFacturation()->getConsommation()->getCompteur()->getAbonnement()->getClient()->getTelephone_abonne();
+        $village_client = $reglementObject->getFacturation()->getConsommation()->getCompteur()->getAbonnement()->getClient()->getChef_village()->getVillage()->getNom_village();
+        $chef_village_client = $reglementObject->getFacturation()->getConsommation()->getCompteur()->getAbonnement()->getClient()->getChef_village()->getPrenom_chef_village();
+
+
+
+        $htmlDataFormat = $htmlDataFormat . '<br><p>[Numéro abonnement : '.$numero_abonnement.']</p>';
+        $htmlDataFormat = $htmlDataFormat . '<br><p>[Nom de famille du client : '.$nom_famille_client.']</p>';
+        $htmlDataFormat = $htmlDataFormat . '<br><p>[Télephone du client : '.$telephone_client_client.']</p>';
+        $htmlDataFormat = $htmlDataFormat . '<br><p>[Village du client : '.$village_client.']</p>';
+        $htmlDataFormat = $htmlDataFormat . '<br><p>[Chef du village du client : '.$chef_village_client.']</p>';
+        
+        $htmlDataFormat = $htmlDataFormat . '<hr>';
+
 
         $htmlDataFormat = $htmlDataFormat . '<br><p>Mode de reglemenet : '.$reglementObject->getEtat_reglement().'</p>';
         $htmlDataFormat = $htmlDataFormat . '<br><p>Date de reglement : '.$reglementObject->getDate_reglement().'</p>';
         $htmlDataFormat = $htmlDataFormat . '<br><p>Taxe : '.$reglementObject->getTaxe().'</p>';
-        $htmlDataFormat = $htmlDataFormat . '<br><p>Montant : '.$reglementObject->getMontant().'</p>';
+        $htmlDataFormat = $htmlDataFormat . '<br><p>Montant : '.$reglementObject->getMontant().' FCFA</p>';
         $htmlDataFormat = $htmlDataFormat . '<br><p>N° Compteur : '.$reglementObject->getFacturation()->getConsommation()->getCompteur()->getNumero_compteur().'</p>';
         // (Optional) Setup the paper size and orientation
         $paperFormat = array();
