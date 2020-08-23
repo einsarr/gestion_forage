@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>PDF generator</title>
+		<!-- l'appel de {$url_base} vous permet de recupérer le chemin de votre site web  -->
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{$url_base}public/css/samane.css"/>
+		<style>
+			h1{ 
+				color: #40007d;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="{$url_base}Welcome"><img src="{$url_base}public/image/logo.jpg" class="resize" /></a>
+		<div class="col-md-8 col-xs-12 col-md-offset-2" style="margin-top:150px;">
+			<div class="panel panel-info">
+				<div class="panel-heading">BIENVENUE A NOTRE PAGE DE TELECHARGEMENT SAMANE MVC
+					
+				</div>
+				<div class="panel-body">
+					{if isset($pdfResult)}
+						<div class="alert alert-warning">
+							<a href="{$url_base}{$pdfResult}" target="_blank" class="btn btn-info">visualiser</a>
+							<br/>
+							<a href="{$url_base}{$pdfResult}" download="reglement.pdf"><img src="{$url_base}public/image/Download-PDF.png" width="200px"></a>
+						</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
