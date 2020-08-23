@@ -40,11 +40,11 @@ class ClientController extends Controller
         foreach($clients as $key=>$value)
         {
             $output.= "<tr>
-                    <td>".++$num."</td>
-                    <td>".$value->getNom_famille()."</td>
-                    <td>".$value->getTelephone_abonne()."</td>
-                    <td>".$value->getChef_Village()->getVillage()->getNom_village()."</td>
-                    <td>".$value->getChef_Village()->getPrenom_chef_village()."</td>
+                    <td style='width:1%'>".++$num."</td>
+                    <td style='width:20%'>".$value->getNom_famille()."</td>
+                    <td style='width:15%'>".$value->getTelephone_abonne()."</td>
+                    <td style='width:20%'>".$value->getChef_Village()->getVillage()->getNom_village()."</td>
+                    <td style='width:25%'>".$value->getChef_Village()->getPrenom_chef_village()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-client'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-client'><span class='fa fa-trash'></span></button>

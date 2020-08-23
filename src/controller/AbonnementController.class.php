@@ -36,11 +36,11 @@ class AbonnementController extends Controller
         foreach($abonnements as $key=>$value)
         {
             $output.= "<tr>
-                    <td>".++$num."</td>
-                    <td>".$value->getNumero_abonnement()."</td>
-                    <td>".$value->getDate_abonnement()."</td>
-                    <td>".$value->getClient()->getNom_famille()."</td>
-                    <td>".$value->getDescription_abonnement()."</td>
+                    <td style='width:1%'>".++$num."</td>
+                    <td style='width:20%'>".$value->getNumero_abonnement()."</td>
+                    <td style='width:20%'>".$value->getDate_abonnement()."</td>
+                    <td style='width:20%'>".$value->getClient()->getNom_famille()."</td>
+                    <td style='width:20%'>".$value->getDescription_abonnement()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-abonnement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-abonnement'><span class='fa fa-trash'></span></button>

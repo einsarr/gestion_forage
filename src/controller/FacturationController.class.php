@@ -37,10 +37,10 @@ class FacturationController extends Controller
         foreach($facturations as $key=>$value)
         {
             $output.= "<tr>
-                    <td>".++$num."</td>
-                    <td>".$value->getDate_facturation()."</td>
-                    <td>".$value->getDate_limite_paiement()."</td>
-                    <td>".$value->getConsommation()->getNombre_litre_consomme() * $value->getConsommation()->getPrix_litre_eau()." FCFA</td>
+                    <td style='width:1%'>".++$num."</td>
+                    <td style='width:25%'>".$value->getDate_facturation()."</td>
+                    <td style='width:25%'>".$value->getDate_limite_paiement()."</td>
+                    <td style='width:25%'>".$value->getConsommation()->getNombre_litre_consomme() * $value->getConsommation()->getPrix_litre_eau()." FCFA</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-facturation'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-facturation'><span class='fa fa-trash'></span></button>

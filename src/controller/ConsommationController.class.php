@@ -40,7 +40,7 @@ class ConsommationController extends Controller
                     <td>".$value->getCode_consommation()."</td>
                     <td>".$value->getNombre_litre_consomme()."</td>
                     <td>".$value->getDate_consommation()."</td>
-                    <td>".$value->getPrix_litre_eau()."</td>
+                    <td>".$value->getPrix_litre_eau()." FCFA</td>
                     <td>".$value->getCompteur()->getNumero_compteur()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-consommation'><span class='fa fa-edit'></span></button>
