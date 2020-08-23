@@ -4,6 +4,7 @@ use src\model\UserRepository;
 use src\model\ClientRepository;
 use src\model\VillageRepository;
 use src\model\Chef_villageRepository;
+use src\service\pdf\SamanePdf;
 class ClientController extends Controller
 {
     private $data;
@@ -95,6 +96,57 @@ class ClientController extends Controller
         $client->deleteClient($id);
         $message = "Suppression reussie";
         echo json_encode($message);
+    }
+
+    public function generate()
+    {
+        $pdf = new SamanePdf();
+
+        $htmlDataFormat = '
+                <table>
+                ';
+        $client = new ClientRepository();
+        $clients = $client->listeClients();
+
+        foreach($clients as $value)
+        {
+            $nom_famille_client = $value->getNom_famille();
+            $telephone_client_client = $value->getTelephone_abonne();
+            $village_client = $value->getChef_village()->getVillage()->getNom_village();
+            $chef_village_client = $value->getChef_village()->getPrenom_chef_village();
+            $htmlDataFormat = $htmlDataFormat.'<tr>';
+                $htmlDataFormat = $htmlDataFormat. '<td>'.$nom_famille_client.'<td>';
+                $htmlDataFormat = $htmlDataFormat.'<td>'.$telephone_client_client.'<td>';
+                $htmlDataFormat =$htmlDataFormat. '<td>'.$village_client.'<td>';
+                $htmlDataFormat = $htmlDataFormat.'<td>'.$chef_village_client.'<td>';
+            $htmlDataFormat = $htmlDataFormat.'</tr>';
+
+        }
+        $htmlDataFormat = $htmlDataFormat.'</table>';
+       
+
+        $htmlDataFormat = $htmlDataFormat . '<hr>';
+        
+        // (Optional) Setup the paper size and orientation
+        $paperFormat = array();
+        $paperFormat['A4'] = 'portrait';//$paperFormat['A4'] = 'landscape';
+        //numérotation
+        $num = rand(1,1000);
+        $nr = $num;
+        $fileName  = 'public/folder/pdf/liste_abonnes'.$nr.'.pdf';
+        /**
+         * V1.9.2
+         */
+        /*if(file_exists($fileName))
+        {
+            unlink($fileName);
+            $fileName  = 'public/folder/pdf/reglement1.pdf';
+        }*/
+        $result = $pdf->generate($htmlDataFormat, $paperFormat, $fileName);
+        
+        $data['pdfResult'] = $fileName;
+
+        return $this->view->load("pdf/index",$data);
     }
 }
 ?>

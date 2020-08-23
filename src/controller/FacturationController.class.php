@@ -136,7 +136,7 @@ class FacturationController extends Controller
         //numérotation
         $num = rand(1,1000);
         $nr = $num;
-        $fileName  = 'public/folder/pdf/reglement'.$nr.'.pdf';
+        $fileName  = 'public/folder/pdf/facture'.$nr.'.pdf';
         /**
          * V1.9.2
          */
