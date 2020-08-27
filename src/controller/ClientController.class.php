@@ -71,10 +71,10 @@ class ClientController extends Controller
         $data = $client->getClient($id);
         $output = array(
             'id' => $data->getId(),
-            'village' => $data->getVillage()->getId(),
+            'chef_village' => $data->getChef_village()->getId(),
             'nom_famille' => $data->getNom_famille(),
             'telephone_abonne' => $data->getTelephone_abonne(),
-        );
+       );
         echo json_encode($output);
     }
     public function update(){
@@ -82,11 +82,11 @@ class ClientController extends Controller
         extract($_POST);
         $clientObject = $client->getClient($id);
         $clientObject = new Client();
-        $village = $client->getVillage($village_id);
+        $chef_village = $client->getChef_village($chef_village_id);
         $clientObject->setId(addslashes($id));
         $clientObject->setNom_famille(addslashes($nom_famille));
         $clientObject->setTelephone_abonne(addslashes($telephone_abonne));
-        $clientObject->setVillage($village);
+        $clientObject->setChef_village($chef_village);
         $client->updateClient($clientObject);
         echo json_encode("Mise à jour effectué avec succès");
    }

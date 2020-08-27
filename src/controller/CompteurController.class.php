@@ -46,7 +46,7 @@ class CompteurController extends Controller
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-compteur'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-compteur'><span class='fa fa-trash'></span></button>
-                        <a href='http://localhost:8081/gestion_forage/Compteur/generate/'".$sarr."'>'".$sarr1."'</a>
+                        <a href='http://localhost:8081/gestion_forage/Compteur/generate/$sarr'>'".$sarr1."'</a>
                     </td>
                 </tr>";
         }

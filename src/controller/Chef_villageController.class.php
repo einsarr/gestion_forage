@@ -68,10 +68,10 @@ class Chef_villageController extends Controller
         $chef_village = new Chef_villageRepository();
         $data = $chef_village->getChef_village($id);
         $output = array(
-            'id' => $data->getId(),
-            'village' => $data->getVillage()->getId(),
-            'nom_famille' => $data->getNom_famille(),
-            'telephone_abonne' => $data->getTelephone_abonne(),
+            'id'                    => $data->getId(),
+            'village_id'            => $data->getVillage()->getId(),
+            'prenom_chef_village'   => $data->getPrenom_chef_village(),
+            'telephone_chef_village'=> $data->getTelephone_chef_village(),
         );
         echo json_encode($output);
     }
@@ -82,8 +82,8 @@ class Chef_villageController extends Controller
         $chef_villageObject = new Chef_village();
         $village = $chef_village->getVillage($village_id);
         $chef_villageObject->setId(addslashes($id));
-        $chef_villageObject->setNom_famille(addslashes($nom_famille));
-        $chef_villageObject->setTelephone_abonne(addslashes($telephone_abonne));
+        $chef_villageObject->setPrenom_chef_village(addslashes($prenom_chef_village));
+        $chef_villageObject->setTelephone_chef_village(addslashes($telephone_chef_village));
         $chef_villageObject->setVillage($village);
         $chef_village->updateChef_village($chef_villageObject);
         echo json_encode("Mise à jour effectué avec succès");

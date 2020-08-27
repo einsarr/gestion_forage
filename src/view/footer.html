@@ -114,6 +114,7 @@
             }
         });
         $(document).on('click', '.edit-client', function() {
+            //alert("ok");
             var id = $(this).attr('id');
             $.ajax({
                 url: "{$url_base}Client/edit/" + id,
@@ -121,7 +122,7 @@
                 dataType: "json",
                 success: function(data) {
                     $('#modalClient').modal('show');
-                    $('#village_id').val(data.village);
+                    $('#chef_village_id').val(data.chef_village);
                     $('#nom_famille').val(data.nom_famille);
                     $('#telephone_abonne').val(data.telephone_abonne);
                     $('#id').val(data.id);
@@ -253,7 +254,9 @@
                 success: function(data) {
                     $('#modalChef_Village').modal('show');
                     $('#identifiant_village').val(data.identifiant_village);
-                    $('#nom_village').val(data.nom_village);
+                    $('#village_id').val(data.village_id);
+                    $('#prenom_chef_village').val(data.prenom_chef_village);
+                    $('#telephone_chef_village').val(data.telephone_chef_village);
                     $('#id').val(data.id);
                     $('#action').val("Edit");
                     $('.modal-title').html("Modification d'un chef de village");

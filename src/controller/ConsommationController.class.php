@@ -36,12 +36,12 @@ class ConsommationController extends Controller
         foreach($consommations as $key=>$value)
         {
             $output.= "<tr>
-                    <td>".++$num."</td>
-                    <td>".$value->getCode_consommation()."</td>
-                    <td>".$value->getNombre_litre_consomme()."</td>
-                    <td>".$value->getDate_consommation()."</td>
-                    <td>".$value->getPrix_litre_eau()." FCFA</td>
-                    <td>".$value->getCompteur()->getNumero_compteur()."</td>
+                    <td style='width:1%'>".++$num."</td>
+                    <td style='width:10%'>".$value->getCode_consommation()."</td>
+                    <td style='width:17%'>".$value->getNombre_litre_consomme()."</td>
+                    <td style='width:20%'>".$value->getDate_consommation()."</td>
+                    <td style='width:20%'>".$value->getPrix_litre_eau()." FCFA</td>
+                    <td style='width:10%'>".$value->getCompteur()->getNumero_compteur()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-consommation'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-consommation'><span class='fa fa-trash'></span></button>

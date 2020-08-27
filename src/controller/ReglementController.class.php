@@ -48,7 +48,7 @@ class ReglementController extends Controller
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-reglement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-reglement'><span class='fa fa-trash'></span></button>
-                        <a href='http://localhost:8081/gestion_forage/Reglement/generate/'".$value->getId()."'><span class='fa fa-print'></span></a>
+                        <a href='http://localhost:8081/gestion_forage/Reglement/generate/{$value->getId()}'><span class='fa fa-print'></span></a>
                     </td>
                 </tr>";
         }

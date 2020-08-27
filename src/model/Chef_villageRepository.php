@@ -27,7 +27,7 @@ class Chef_villageRepository extends Model{
 			return $this->db->getRepository('Village')->find(array('id' => $id));
 		}
 	}
-	public function get_chef_village($id)
+	public function getChef_village($id)
 	{
 		if($this->db != null)
 		{
@@ -66,13 +66,9 @@ class Chef_villageRepository extends Model{
 			$u = $this->db->find('Chef_village', $village->getId());
 			if($u != null)
 			{
-				$u->setNom($village->getNom());
-				$u->setPrenom($village->getPrenom());
-                $u->setEmail($village->getEmail());
-                $u->setPassword($village->getPassword());
-                $u->setPassword($village->getPassword());
-                $u->setPassword($village->getPassword());
-                $u->setRoles($village->getRoles());
+				$u->setPrenom_chef_village($village->getPrenom_chef_village());
+				$u->setTelephone_chef_village($village->getTelephone_chef_village());
+                $u->setVillage($village->getVillage());
 				$this->db->flush();
 			}else {
 				die("Objet ".$village->getId()." n'existe pas!!");

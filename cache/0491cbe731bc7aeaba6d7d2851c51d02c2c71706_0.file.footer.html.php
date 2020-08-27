@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 01:57:19
+/* Smarty version 3.1.30, created on 2020-08-27 17:44:28
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f308d5fbb2d15_98210051',
+  'unifunc' => 'content_5f47d4dcdfdfb5_31290777',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1597016734,
+      1 => 1598543051,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f308d5fbb2d15_98210051 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f47d4dcdfdfb5_31290777 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -174,6 +174,7 @@ Client/Update",
             }
         });
         $(document).on('click', '.edit-client', function() {
+            //alert("ok");
             var id = $(this).attr('id');
             $.ajax({
                 url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
@@ -182,7 +183,7 @@ Client/edit/" + id,
                 dataType: "json",
                 success: function(data) {
                     $('#modalClient').modal('show');
-                    $('#village_id').val(data.village);
+                    $('#chef_village_id').val(data.chef_village);
                     $('#nom_famille').val(data.nom_famille);
                     $('#telephone_abonne').val(data.telephone_abonne);
                     $('#id').val(data.id);
@@ -322,7 +323,9 @@ Chef_village/edit/" + id,
                 success: function(data) {
                     $('#modalChef_Village').modal('show');
                     $('#identifiant_village').val(data.identifiant_village);
-                    $('#nom_village').val(data.nom_village);
+                    $('#village_id').val(data.village_id);
+                    $('#prenom_chef_village').val(data.prenom_chef_village);
+                    $('#telephone_chef_village').val(data.telephone_chef_village);
                     $('#id').val(data.id);
                     $('#action').val("Edit");
                     $('.modal-title').html("Modification d'un chef de village");

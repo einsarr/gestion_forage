@@ -74,7 +74,7 @@ class ClientRepository extends Model{
 			{
 				$u->setNom_famille($client->getNom_famille());
 				$u->setTelephone_abonne($client->getTelephone_abonne());
-				$u->setVillage($client->getVillage());
+				$u->setChef_village($client->getChef_village());
 				$this->db->flush();
 			}else {
 				die("Objet ".$client->getId()." n'existe pas!!");

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 00:38:03
+/* Smarty version 3.1.30, created on 2020-08-27 18:15:27
   from "C:\xampp\htdocs\gestion_forage\src\view\consommations\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f307acb433653_97332944',
+  'unifunc' => 'content_5f47dc1f106179_43661288',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '819c4fa456f5783cef94db5fb2e153f0321dc85a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\consommations\\liste.html',
-      1 => 1597012680,
+      1 => 1598544925,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f307acb433653_97332944 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f47dc1f106179_43661288 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -45,7 +45,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
             <thead>
                 <tr>
                     <th>N°</th>
-                    <th>Code consommation</th>
+                    <th>Code</th>
                     <th>Nombre de litre</th>
                     <th>Date consommation</th>
                     <th>Prix du litre d'eau</th>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-23 23:25:12
+/* Smarty version 3.1.30, created on 2020-08-27 18:10:32
   from "C:\xampp\htdocs\gestion_forage\src\view\pdf\index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f42deb8ccff03_66787558',
+  'unifunc' => 'content_5f47daf81a02d7_79065491',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3ae71da06f60b575e50f771f5ce4101fb31cbb07' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\pdf\\index.html',
-      1 => 1598217906,
+      1 => 1598544629,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f42deb8ccff03_66787558 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f47daf81a02d7_79065491 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 	<head>
@@ -48,6 +48,8 @@ public/image/logo.jpg" class="resize" /></a>
 					
 				</div>
 				<div class="panel-body">
+					<?php $_smarty_tpl->_assignInScope('fichier', explode('/',$_smarty_tpl->tpl_vars['pdfResult']->value));
+?>
 					<?php if (isset($_smarty_tpl->tpl_vars['pdfResult']->value)) {?>
 						<div class="alert alert-warning">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;
@@ -56,7 +58,8 @@ echo $_smarty_tpl->tpl_vars['pdfResult']->value;?>
 							<br/>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;
 echo $_smarty_tpl->tpl_vars['pdfResult']->value;?>
-" download="reglement.pdf"><img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+" download="<?php echo $_smarty_tpl->tpl_vars['fichier']->value[3];?>
+"><img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 public/image/Download-PDF.png" width="200px"></a>
 						</div>
 					<?php }?>

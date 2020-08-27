@@ -19,11 +19,12 @@
 					
 				</div>
 				<div class="panel-body">
+					{$fichier = explode('/',$pdfResult)}
 					{if isset($pdfResult)}
 						<div class="alert alert-warning">
 							<a href="{$url_base}{$pdfResult}" target="_blank" class="btn btn-info">visualiser</a>
 							<br/>
-							<a href="{$url_base}{$pdfResult}" download="reglement.pdf"><img src="{$url_base}public/image/Download-PDF.png" width="200px"></a>
+							<a href="{$url_base}{$pdfResult}" download="{$fichier[3]}"><img src="{$url_base}public/image/Download-PDF.png" width="200px"></a>
 						</div>
 					{/if}
 				</div>

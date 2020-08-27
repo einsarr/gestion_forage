@@ -44,7 +44,7 @@ class FacturationController extends Controller
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-facturation'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-facturation'><span class='fa fa-trash'></span></button>
-                        <a href='http://localhost:8081/gestion_forage/Facturation/generate/'".$value->getId()."'><span class='fa fa-print'></span></a>
+                        <a href='http://localhost:8081/gestion_forage/Facturation/generate/{$value->getId()}'><span class='fa fa-print'></span></a>
                         </td>
                 </tr>";
         }
