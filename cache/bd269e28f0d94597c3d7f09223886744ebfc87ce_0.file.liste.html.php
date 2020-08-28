@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 02:43:23
+/* Smarty version 3.1.30, created on 2020-08-27 20:00:14
   from "C:\xampp\htdocs\gestion_forage\src\view\villages\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f30982b4c9c69_87347052',
+  'unifunc' => 'content_5f47f4ae4823f7_06930604',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bd269e28f0d94597c3d7f09223886744ebfc87ce' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\villages\\liste.html',
-      1 => 1596410887,
+      1 => 1598548156,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f30982b4c9c69_87347052 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f47f4ae4823f7_06930604 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -81,7 +81,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                     </div>
                     <div class="form-group">
                         <label>Nom du village</label>
-                        <input type="text" name="nom_village" id="nom_village" class="form-control" placeholder="Numéro de téléphone" required>
+                        <input type="text" name="nom_village" id="nom_village" class="form-control" placeholder="Nom du village" required>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -27,6 +27,7 @@ class User
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        //$this->compteurs = new ArrayCollection();
     }
     public function getId()
     {
@@ -81,6 +82,14 @@ class User
     {
         $this->roles = $roles;
     }
+    /*public function getCompteurs()
+    {
+        return $this->compteurs;
+    }
+    public function setCompteurs($compteurs)
+    {
+        $this->compteurs = $compteurs;
+    }*/
 
     public function hasRole($nom)
     {

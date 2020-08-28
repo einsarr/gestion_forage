@@ -38,13 +38,13 @@ class ReglementController extends Controller
         foreach($reglements as $key=>$value)
         {
             $output.= "<tr>
-                    <td>".++$num."</td>
-                    <td>".$value->getEtat_reglement()."</td>
-                    <td>".$value->getFacturation()->getDate_limite_paiement()."</td>
-                    <td>".$value->getDate_reglement()."</td>
-                    <td>".$value->getFacturation()->getConsommation()->getNombre_litre_consomme()*$value->getFacturation()->getConsommation()->getPrix_litre_eau()." FCFA</td>
-                    <td>".$value->getTaxe()." FCFA</td>
-                    <td>".$value->getMontant()." FCFA</td>
+                    <td style='width:1%'>".++$num."</td>
+                    <td style='width:1%'>".$value->getEtat_reglement()."</td>
+                    <td style='width:15%'>".$value->getFacturation()->getDate_limite_paiement()."</td>
+                    <td style='width:15%'>".$value->getDate_reglement()."</td>
+                    <td style='width:15%'>".$value->getFacturation()->getConsommation()->getNombre_litre_consomme()*$value->getFacturation()->getConsommation()->getPrix_litre_eau()." FCFA</td>
+                    <td style='width:10%'>".$value->getTaxe()." FCFA</td>
+                    <td style='width:15%'>".$value->getMontant()." FCFA</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-reglement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-reglement'><span class='fa fa-trash'></span></button>

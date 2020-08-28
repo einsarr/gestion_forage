@@ -13,6 +13,7 @@ class Compteur
     private $numero_compteur;
     /** @Column(type="string") **/
     private $etat_compteur;
+   
      /**
      * One Compteur has One Abonnement.
      * @OneToOne(targetEntity="Abonnement")
@@ -72,6 +73,15 @@ class Compteur
     public function setConsommations($consommations)
     {
         $this->consommations = $consommations;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

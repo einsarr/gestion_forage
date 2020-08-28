@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 00:44:30
+/* Smarty version 3.1.30, created on 2020-08-27 19:54:34
   from "C:\xampp\htdocs\gestion_forage\src\view\compteurs\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f307c4ee32c53_51114886',
+  'unifunc' => 'content_5f47f35ab90e85_69470328',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'da2b8e842960f4e55a595e3f8c0c0055a2c7beb6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\compteurs\\liste.html',
-      1 => 1597009481,
+      1 => 1598550870,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f307c4ee32c53_51114886 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f47f35ab90e85_69470328 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -48,6 +48,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                     <th>Numéro compteur</th>
                     <th>Etat du compteur</th>
                     <th>Numéro abonnement</th>
+                    <th>L'abonné</th>
                     <th>Options</th>
                 </tr>
             </thead>

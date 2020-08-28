@@ -20,9 +20,7 @@ class CompteurController extends Controller
 
     public function liste()
     {
-        $userdb = new UserRepository();
-        $this->data['users'] = $userdb->listeUser();
-
+       
         $abonnementdb = new AbonnementRepository();
         $this->data['abonnements'] = $abonnementdb->listeAbonnements();
 
@@ -40,9 +38,10 @@ class CompteurController extends Controller
             $sarr1 = $value->getEtat_compteur()==='Coupé' ? "Bon de coupure" : "";
             $output.= "<tr>
                     <td style='width:1%'>".++$num."</td>
-                    <td style='width:20%'>".$value->getNumero_compteur()."</td>
+                    <td style='width:15%'>".$value->getNumero_compteur()."</td>
                     <td style='width:20%'>".$value->getEtat_compteur()."</td>
-                    <td style='width:25%'>".$value->getAbonnement()->getNumero_abonnement()."</td>
+                    <td style='width:20%'>".$value->getAbonnement()->getNumero_abonnement()."</td>
+                    <td style='width:15%'>".$value->getAbonnement()->getClient()->getNom_famille()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-compteur'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-compteur'><span class='fa fa-trash'></span></button>
@@ -55,11 +54,13 @@ class CompteurController extends Controller
     public function add(){
         $compteur = new CompteurRepository();
         extract($_POST);
+        //$user = $this->data['user'];
         $compteurRepositoryObject = new Compteur();
         $abonnement = $compteur->getAbonnement($abonnement_id);
         $compteurRepositoryObject->setNumero_compteur(addslashes($numero_compteur));
         $compteurRepositoryObject->setEtat_compteur(addslashes($etat_compteur));
         $compteurRepositoryObject->setAbonnement($abonnement);
+        //$compteurRepositoryObject->setUser($user);
 
         $compteur->addCompteur($compteurRepositoryObject);
         echo json_encode("ajout réussie avec succès");
