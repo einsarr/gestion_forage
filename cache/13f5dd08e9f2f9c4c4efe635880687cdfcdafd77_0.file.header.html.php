@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 00:35:46
+/* Smarty version 3.1.30, created on 2020-09-17 12:47:15
   from "C:\xampp\htdocs\gestion_forage\src\view\header.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f307a428d9717_00989313',
+  'unifunc' => 'content_5f633eb3bf9b20_60403412',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '13f5dd08e9f2f9c4c4efe635880687cdfcdafd77' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\header.html',
-      1 => 1595805936,
+      1 => 1600339632,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f307a428d9717_00989313 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f633eb3bf9b20_60403412 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -84,11 +84,11 @@ public/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet
         </div>
         <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_USER")) {?>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Gestion</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Gestion:</h6>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
@@ -114,11 +114,11 @@ Reglement/liste">Reglements</a>
         <?php if ($_smarty_tpl->tpl_vars['user']->value->hasRole("ROLE_ADMIN")) {?>
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Sécurité</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Administartion:</h6>
                         <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
