@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-09-17 12:47:15
+/* Smarty version 3.1.30, created on 2020-09-17 15:08:14
   from "C:\xampp\htdocs\gestion_forage\src\view\header.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f633eb3bf9b20_60403412',
+  'unifunc' => 'content_5f635fbe82c839_79621052',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '13f5dd08e9f2f9c4c4efe635880687cdfcdafd77' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\header.html',
-      1 => 1600339632,
+      1 => 1600348079,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f633eb3bf9b20_60403412 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f635fbe82c839_79621052 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,9 +60,10 @@ public/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <img src="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+public/image/forage.jpg" alt="forage" width="60px">
             </div>
-            <div class="sidebar-brand-text mx-3">Forage</div>
+            <div class="sidebar-brand-text mx-3">Sen Forage</div>
         </a>
 
         <!-- Divider -->
@@ -92,17 +93,17 @@ public/template/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Gestion:</h6>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-Client/liste">Clients</a>
-                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Village/liste">Villages</a>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Chef_village/liste">Chefs de village</a>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Client/liste">Clients</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Abonnement/liste">Abonnement</a>
+                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Compteur/liste">Compteurs</a>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Consommation/liste">Consommations</a>
-                    <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
-Abonnement/liste">Abonnement</a>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
 Facturation/liste">Faturation</a>
                     <a class="collapse-item" href="<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>

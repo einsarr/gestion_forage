@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-27 17:44:28
+/* Smarty version 3.1.30, created on 2020-09-17 14:18:41
   from "C:\xampp\htdocs\gestion_forage\src\view\footer.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f47d4dcdfdfb5_31290777',
+  'unifunc' => 'content_5f635421b29bf9_39055036',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0491cbe731bc7aeaba6d7d2851c51d02c2c71706' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\footer.html',
-      1 => 1598543051,
+      1 => 1600345118,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f47d4dcdfdfb5_31290777 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f635421b29bf9_39055036 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 </div>
 <!-- /.container-fluid -->
@@ -136,7 +136,117 @@ public/template/js/demo/datatables-demo.js"><?php echo '</script'; ?>
         load_compteurs();
         load_consommations();
         load_facturations();
-        load_reglements(),
+        load_reglements();
+        load_users();
+
+        //CRUD ROLE
+        $('#role_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Roles/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalRole').modal('hide');
+                        $('#role_form')[0].reset();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+        });
+        $(document).on('click', '.delete-role', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+Roles/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_users();
+                    }
+                });
+            }
+        });
+        //CRUD USER
+        $('#user_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+User/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalUser').modal('hide');
+                        $('#user_form')[0].reset();
+                        load_users();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+User/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalUser').modal('hide');
+                        load_users();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-user', function() {
+            //alert("ok");
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+User/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalUser').modal('show');
+                    $('#nom').val(data.nom);
+                    $('#prenom').val(data.prenom);
+                    $('#password').val(data.password);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un user");
+                }
+            });
+        });
+        $(document).on('click', '.delete-user', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+User/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_users();
+                    }
+                });
+            }
+        });
+
+
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -701,7 +811,17 @@ Reglement/delete/" + id,
         });
        
     });
-    
+    //Fonction de chargement les users
+    function load_users() {
+            $.ajax({
+                url: "<?php echo $_smarty_tpl->tpl_vars['url_base']->value;?>
+User/load_users",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-users').html(result);
+                }
+            });
+        }
     //Fonction de chargement les facturation
     function load_reglements() {
             $.ajax({

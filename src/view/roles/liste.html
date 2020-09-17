@@ -1,22 +1,73 @@
 {include file='src/view/header.html'}
-<div class="container">
-    <div class="card">
-        <div class="card-header">Liste des roles</div>
-        <div class="card-body">
-            <table class="table">
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRole">
+		<i class="fas fa-plus"></i> Nouveau
+	  </button><br><br>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">LISTE DES ROLES</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
                 <tr>
-                    <th>Identifiant du role</th>
+                    <th>Identifiant</th>
                     <th>Libelle du role</th>
+                    <th>Options</th>
                 </tr>
+            </thead>
+            <tbody>
                 {foreach from=$roles item=role}
                     <tr>
                         <td>{$role->getId()}</td>
                         <td>{$role->getNom()}</td>
+                        <td> 
+                          <a href="{$url_base}Roles/delete/{$role->getId()}" class='btn btn-danger btn-xs delete-role'>del</a>
+                        </td>
                     </tr>
                 {/foreach}
-            </table>
-
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+
+  <div class="modal fade" id="modalRole">
+    <div class="modal-dialog">
+        <form method="post" id="role_form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-primary">Ajout d'un role</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Libellé du role</label>
+                        <input type="text" name="libelle" id="libelle" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" id="id">
+                    <input type="submit" name="action" id="action" class="btn btn-primary" value="Add">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </form>
+    </div>
+    <!-- /.modal-dialog -->
 </div>
-{include file='src/view/footer.html'}
+  {include file='src/view/footer.html'}
+

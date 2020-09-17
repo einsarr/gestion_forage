@@ -78,7 +78,111 @@
         load_compteurs();
         load_consommations();
         load_facturations();
-        load_reglements(),
+        load_reglements();
+        load_users();
+
+        //CRUD ROLE
+        $('#role_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}Roles/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalRole').modal('hide');
+                        $('#role_form')[0].reset();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+        });
+        $(document).on('click', '.delete-role', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}Roles/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_users();
+                    }
+                });
+            }
+        });
+        //CRUD USER
+        $('#user_form').on('submit', function(event) {
+            event.preventDefault();
+            if ($('#action').val() == 'Add') {
+                $.ajax({
+                    url: "{$url_base}User/add",
+                    method: "post",
+                    data: $('form').serialize(),
+                    dataType: "json",
+                    success: function(strMessage) {
+                        $('#message').text(strMessage);
+                        $('#modalUser').modal('hide');
+                        $('#user_form')[0].reset();
+                        load_users();
+                    },
+                    error: function() {
+                        $('#message').text(strMessage);
+                    }
+                });
+            }
+            if ($('#action').val() == 'Edit') {
+                $.ajax({
+                    url: "{$url_base}User/Update",
+                    data: $('form').serialize(),
+                    type: "POST",
+                    dataType: "json",
+                    success: function(result) {
+                        $('#message').text(result);
+                        $('#modalUser').modal('hide');
+                        load_users();
+                    },
+                });
+            }
+        });
+        $(document).on('click', '.edit-user', function() {
+            //alert("ok");
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{$url_base}User/edit/" + id,
+                method: "POST",
+                dataType: "json",
+                success: function(data) {
+                    $('#modalUser').modal('show');
+                    $('#nom').val(data.nom);
+                    $('#prenom').val(data.prenom);
+                    $('#password').val(data.password);
+                    $('#id').val(data.id);
+                    $('#action').val("Edit");
+                    $('.modal-title').html("Modification d'un user");
+                }
+            });
+        });
+        $(document).on('click', '.delete-user', function() {
+            var id = $(this).attr("id");
+            if (confirm("Etes vous sure de vouloir supprimer ?")) {
+                $.ajax({
+                    url: "{$url_base}User/delete/" + id,
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        $('#message').text(data);
+                        load_users();
+                    }
+                });
+            }
+        });
+
+
         //CRUD CLIENT
         $('#client_form').on('submit', function(event) {
             event.preventDefault();
@@ -611,7 +715,16 @@
         });
        
     });
-    
+    //Fonction de chargement les users
+    function load_users() {
+            $.ajax({
+                url: "{$url_base}User/load_users",
+                dataType: "json",
+                success: function(result) {
+                    $('#result-users').html(result);
+                }
+            });
+        }
     //Fonction de chargement les facturation
     function load_reglements() {
             $.ajax({

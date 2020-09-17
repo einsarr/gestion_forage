@@ -35,4 +35,25 @@ class RolesRepository extends Model{
         }
     }
 
+    public function getRole($id)
+	{
+		if($this->db != null)
+		{
+			return $this->db->getRepository('Roles')->find(array('id' => $id));
+		}
+    }
+    public function deleteRole($id){
+		if($this->db != null)
+		{
+			$role = $this->db->find('Roles', $id);
+			if($role != null)
+			{
+				$this->db->remove($role);
+				$this->db->flush();
+			}else {
+				die("Objet ".$id." n'existe pas");
+			}
+		}
+	}
+
 }

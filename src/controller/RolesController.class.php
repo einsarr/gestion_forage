@@ -36,5 +36,22 @@ class RolesController extends Controller
         }
         return $this->view->responseJson($roles);
     }
+    
+    public function add(){
+        //var_dump("ok");exit;
+        $role = new RolesRepository();
+        extract($_POST);
+        $roleObject = new Roles();
+        $roleObject->setNom(addslashes($libelle));
+        $role->add($roleObject);
+        echo json_encode("ajout réussie avec succès");
+   }
+   public function delete($id){
+        $role = new RolesRepository();
+        $roleObject = $role->getRole($id);
+        $role->deleteRole($id);
+        $message = "Suppression reussie";
+        echo json_encode($message);
+    }
 }
 ?>
