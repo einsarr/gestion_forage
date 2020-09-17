@@ -25,6 +25,13 @@ class ReglementRepository extends Model{
 		{
 			return $this->db->getRepository('Facturation')->find(array('id' => $id));
 		}
+	}
+	public function getUser($id)
+	{
+		if($this->db != null)
+		{
+			return $this->db->getRepository('User')->find(array('id' => $id));
+		}
     }
 	public function getReglement($id)
 	{

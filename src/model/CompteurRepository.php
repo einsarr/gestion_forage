@@ -81,6 +81,13 @@ class CompteurRepository extends Model{
 			return $this->db->createQuery("SELECT a FROM Compteur a")->getResult();// array of Compteur objects
 		}
 	}
+
+	public function listeCompteurs_ncoupe(){
+		if($this->db != null)
+		{
+			return $this->db->createQuery("SELECT c FROM Compteur c WHERE c.etat_compteur='Actif'")->getResult();// array of Compteur objects
+		}
+	}
 	
 
 	

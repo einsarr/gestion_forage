@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-10 02:25:20
+/* Smarty version 3.1.30, created on 2020-09-17 16:14:10
   from "C:\xampp\htdocs\gestion_forage\src\view\reglements\liste.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f3093f0d8c095_87614654',
+  'unifunc' => 'content_5f636f32659219_70488159',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '54321de8a33533da9ae34c4dc7fd344a588882a6' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\reglements\\liste.html',
-      1 => 1597018985,
+      1 => 1600352047,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f3093f0d8c095_87614654 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f636f32659219_70488159 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -50,7 +50,8 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                     <th>Date du reglement</th>
                     <th>Facturation</th>
                     <th>Taxe</th>
-                    <th>Montant</th>
+                    <th>A payé</th>
+                    <th>User</th>
                     <th>Options</th>
                 </tr>
             </thead>

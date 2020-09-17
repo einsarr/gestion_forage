@@ -45,6 +45,7 @@ class ReglementController extends Controller
                     <td style='width:15%'>".$value->getFacturation()->getConsommation()->getNombre_litre_consomme()*$value->getFacturation()->getConsommation()->getPrix_litre_eau()." FCFA</td>
                     <td style='width:10%'>".$value->getTaxe()." FCFA</td>
                     <td style='width:15%'>".$value->getMontant()." FCFA</td>
+                    <td style='width:15%'>".$value->getUser()->getPrenom()."</td>
                     <td>
                         <button type='button' name='edit' id='".$value->getId()."' class='btn btn-warning btn-xs edit-reglement'><span class='fa fa-edit'></span></button>
                         <button type='button' name='delete' id='".$value->getId()."' class='btn btn-danger btn-xs delete-reglement'><span class='fa fa-trash'></span></button>
@@ -59,6 +60,8 @@ class ReglementController extends Controller
         extract($_POST);
         $reglementObject = new Reglement();
         $facturation = $reglement->getFacturation($facturation_id);
+        //var_dump($facturation->getDate_limite_paiement() < date("Y-m-d"));exit;
+        $user       = $reglement->getUser($this->data['user']->getId());
         $total = $facturation->getConsommation()->getNombre_litre_consomme()*$facturation->getConsommation()->getPrix_litre_eau();
         if($facturation->getDate_limite_paiement() < date("Y-m-d"))
         {
@@ -74,14 +77,12 @@ class ReglementController extends Controller
         }
         else{
             $reglementObject->setMontant(addslashes($total));
+            $reglementObject->setTaxe(addslashes(0.0));
         }
         $reglementObject->setEtat_reglement(addslashes($etat_reglement));
         $reglementObject->setDate_reglement(addslashes(date("Y-m-d")));
-        $reglementObject->setTaxe(addslashes(0.0));
+        $reglementObject->setUser($user);
         $reglementObject->setFacturation($facturation);
-
-       
-
 
         $reglement->addReglement($reglementObject);
         echo json_encode("ajout réussie avec succès");

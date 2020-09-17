@@ -23,6 +23,12 @@ class Reglement
      * @JoinColumn(name="facturation_id", referencedColumnName="id")
      */
     private $facturation;
+    /**
+     * Many Reglements have one User. This is the owning side.
+     * @ManyToOne(targetEntity="User", inversedBy="reglements")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
     public function __construct()
     {
     }
@@ -74,6 +80,15 @@ class Reglement
     public function setEtat_reglement($etat_reglement)
     {
         $this->etat_reglement = $etat_reglement;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

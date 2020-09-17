@@ -64,10 +64,10 @@ class User extends \User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'User' . "\0" . 'id', '' . "\0" . 'User' . "\0" . 'nom', '' . "\0" . 'User' . "\0" . 'prenom', '' . "\0" . 'User' . "\0" . 'email', '' . "\0" . 'User' . "\0" . 'password', '' . "\0" . 'User' . "\0" . 'roles', '' . "\0" . 'User' . "\0" . 'compteurs'];
+            return ['__isInitialized__', '' . "\0" . 'User' . "\0" . 'id', '' . "\0" . 'User' . "\0" . 'nom', '' . "\0" . 'User' . "\0" . 'prenom', '' . "\0" . 'User' . "\0" . 'email', '' . "\0" . 'User' . "\0" . 'password', '' . "\0" . 'User' . "\0" . 'roles', '' . "\0" . 'User' . "\0" . 'reglements'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'User' . "\0" . 'id', '' . "\0" . 'User' . "\0" . 'nom', '' . "\0" . 'User' . "\0" . 'prenom', '' . "\0" . 'User' . "\0" . 'email', '' . "\0" . 'User' . "\0" . 'password', '' . "\0" . 'User' . "\0" . 'roles', '' . "\0" . 'User' . "\0" . 'compteurs'];
+        return ['__isInitialized__', '' . "\0" . 'User' . "\0" . 'id', '' . "\0" . 'User' . "\0" . 'nom', '' . "\0" . 'User' . "\0" . 'prenom', '' . "\0" . 'User' . "\0" . 'email', '' . "\0" . 'User' . "\0" . 'password', '' . "\0" . 'User' . "\0" . 'roles', '' . "\0" . 'User' . "\0" . 'reglements'];
     }
 
     /**
@@ -307,6 +307,28 @@ class User extends \User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoles', [$roles]);
 
         return parent::setRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getReglements()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getReglements', []);
+
+        return parent::getReglements();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setReglements($reglements)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setReglements', [$reglements]);
+
+        return parent::setReglements($reglements);
     }
 
     /**

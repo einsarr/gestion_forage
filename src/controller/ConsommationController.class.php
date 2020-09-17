@@ -23,7 +23,7 @@ class ConsommationController extends Controller
         $this->data['users'] = $userdb->listeUser();
 
         $compteurdb = new CompteurRepository();
-        $this->data['compteurs'] = $compteurdb->listeCompteurs();
+        $this->data['compteurs'] = $compteurdb->listeCompteurs_ncoupe();
 
         return $this->view->load("consommations/liste", $this->data);
     }

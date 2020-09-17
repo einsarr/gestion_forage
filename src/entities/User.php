@@ -23,11 +23,15 @@ class User
      * @JoinTable(name="users_roles")
      */
     private $roles;
-    
+     /**
+     * One User has many Reglement. This is the inverse side.
+     * @OneToMany(targetEntity="Reglement", mappedBy="User")
+     */
+    private $reglements;
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-        //$this->compteurs = new ArrayCollection();
+        $this->reglements = new ArrayCollection();
     }
     public function getId()
     {
@@ -82,14 +86,14 @@ class User
     {
         $this->roles = $roles;
     }
-    /*public function getCompteurs()
+    public function getReglements()
     {
-        return $this->compteurs;
+        return $this->reglements;
     }
-    public function setCompteurs($compteurs)
+    public function setReglements($reglements)
     {
-        $this->compteurs = $compteurs;
-    }*/
+        $this->reglements = $reglements;
+    }
 
     public function hasRole($nom)
     {
