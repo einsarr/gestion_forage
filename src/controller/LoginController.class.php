@@ -16,7 +16,7 @@ class LoginController extends Controller
         $user = null;
         try {
             $userdb = new UserRepository();
-            $user = $userdb->getUserByLogin($_POST['email'], $_POST['password']);
+            $user = $userdb->getUserByLogin($_POST['email'], sha1($_POST['password']));
             if($user != null) {
                 session_start();
                 $roles = array();
@@ -26,8 +26,13 @@ class LoginController extends Controller
                 }
                 $user->setRoles($roles);
                 $_SESSION['user_session'] = $user;
-
-                return $this->view->redirect('Welcome');//controller
+                //S'il n'a pas de role on l'empêche de se connecter
+                if($roles!=null)
+                {
+                    return $this->view->redirect('Welcome');//controller
+                }else{
+                    return $this->view->redirect('Login');//controller
+                }
             } else {
                 return $this->view->redirect('Login');//controller
             }

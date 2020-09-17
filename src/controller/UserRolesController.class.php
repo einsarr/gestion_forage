@@ -56,8 +56,8 @@ class UserRolesController extends Controller
             $user->setRoles($roles);//Modification des roles
             $userdb->updateUser($user);
         }
-        session_start();
-        $_SESSION['user_session'] = $user;
+        //session_start();
+        //$_SESSION['user_session'] = $user;
         return $this->view->redirect('UserRoles/affectation/'.$_POST['idUser']);
     }
 

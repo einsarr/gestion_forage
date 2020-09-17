@@ -1,39 +1,68 @@
 {include file='src/view/header.html'}
-    <div class="container">
-        <div class="card">
-            <div class="card-header">Liste des utilisateurs</div>
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>Identifiant</th>
-                        <th>Prenom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Action</th>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="row">
+<div class="col-md-8">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">LISTE DES USERS</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {foreach from=$users item=$user}
+                    <tr  {if isset($idUser)}
+                            {if $idUser == $user->getId()}
+                                class="alert alert-warning"
+                            {/if}
+                        {/if}>
+                        <td>{$user->getId()}</td>
+                        <td>{$user->getPrenom()}</td>
+                        <td>{$user->getNom()}</td>
+                        <td>{$user->getEmail()}</td>
+                        <td><a href="{$url_base}UserRoles/affectation/{$user->getId()}"></a>
+                        
+                            <a href="{$url_base}UserRoles/affectation/{$user->getId()}" class="btn btn-success btn-circle btn-xs">
+                                <i class="fas fa-check"></i>
+                              </a>
+
+                        </td>
                     </tr>
-                    {foreach from=$users item=$user}
-                        <tr
-                                {if isset($idUser)}
-                                    {if $idUser == $user->getId()}
-                                        class="alert alert-primary"
-                                    {/if}
-                                {/if}
-                        >
-                            <td>{$user->getId()}</td>
-                            <td>{$user->getPrenom()}</td>
-                            <td>{$user->getNom()}</td>
-                            <td>{$user->getEmail()}</td>
-                            <td><a href="{$url_base}UserRoles/affectation/{$user->getId()}">Affecter un role</a></td>
-                        </tr>
-                    {/foreach}
-                </table>
-                <div>Liste des roles disponible</div>
-                <table class="table">
-                    <tr>
-                        <th>Libelle du role</th>
-                        <th>Affectation</th>
-                    </tr>
-                    <form method="post" action="{$url_base}UserRoles/affecter">
+                {/foreach}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">AFFECTATION</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Libelle du role</th>
+                    <th>Affectation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="post" action="{$url_base}UserRoles/affecter">
                     {foreach from=$roles item=role}
 
                             <tr>
@@ -50,14 +79,46 @@
                     {if isset($usersroles)}
                         <tr>
                             <td colspan="2">
-                                <input class="btn btn-success" type="submit" value="Attribuer roles"/>
+                                <button type="submit" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                      <i class="fas fa-check"></i>
+                                    </span>
+                                    <span class="text">Attribuer roles</span>
+                                  </button>
                             </td>
                         </tr>
                         {/if}
                     </form>
-                </table>
-
-            </div>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-{include file='src/view/footer.html'}
+</div>
+</div>
+
+
+  </div>
+  <!-- /.container-fluid -->
+  {include file='src/view/footer.html'}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

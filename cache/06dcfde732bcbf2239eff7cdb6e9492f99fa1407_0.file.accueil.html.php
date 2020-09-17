@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-24 01:22:28
+/* Smarty version 3.1.30, created on 2020-09-17 15:32:43
   from "C:\xampp\htdocs\gestion_forage\src\view\accueil.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f42fa347db1d6_55982441',
+  'unifunc' => 'content_5f63657b8d1e86_37943756',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '06dcfde732bcbf2239eff7cdb6e9492f99fa1407' => 
     array (
       0 => 'C:\\xampp\\htdocs\\gestion_forage\\src\\view\\accueil.html',
-      1 => 1598224945,
+      1 => 1600349559,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:src/view/footer.html' => 1,
   ),
 ),false)) {
-function content_5f42fa347db1d6_55982441 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f63657b8d1e86_37943756 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -63,7 +63,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Nombre de compteur coupé</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
               </div>
               <div class="col-auto">
                 <i class=" fa-2x text-gray-300"></i>
@@ -82,7 +82,7 @@ $_smarty_tpl->_subTemplateRender("file:src/view/header.html", $_smarty_tpl->cach
                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de village</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
-                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50</div>
                   </div>
                   <div class="col">
                     <div class="progress progress-sm mr-2">

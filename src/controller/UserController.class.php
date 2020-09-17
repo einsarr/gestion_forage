@@ -52,7 +52,7 @@ class UserController extends Controller
         $userObject->setPrenom(addslashes($prenom));
         $userObject->setNom(addslashes($nom));
         $userObject->setEmail($email);
-        $userObject->setPassword($password);
+        $userObject->setPassword(sha1($password));
 
         $user->addUser($userObject);
         echo json_encode("ajout réussie avec succès");
