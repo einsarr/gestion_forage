@@ -52,6 +52,7 @@ class UserController extends Controller
         $userObject->setPrenom(addslashes($prenom));
         $userObject->setNom(addslashes($nom));
         $userObject->setEmail($email);
+        //crypter le mot de passe avec sha1
         $userObject->setPassword(sha1($password));
 
         $user->addUser($userObject);
